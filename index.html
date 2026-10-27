@@ -126,6 +126,7 @@
               </div>
             </div>
             <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Datos Titular -->
               <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">Nombre y Apellido *</label>
                 <div class="relative">
@@ -140,6 +141,25 @@
                   <input type="text" id="client-dni" placeholder="Ej: 20-33456789-2" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
                 </div>
               </div>
+
+              <!-- NUEVO: Datos Cónyuge / Co-titular -->
+              <div class="pt-2 border-t border-slate-100 sm:col-span-2"></div>
+              
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Cónyuge / Co-titular (Opcional)</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-user-group text-sm"></i></span>
+                  <input type="text" id="client-spouse" placeholder="Nombre completo" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1">DNI Cónyuge / Co-titular</label>
+                <input type="text" id="client-spouse-dni" placeholder="Ej: 20-11223344-5" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
+              </div>
+
+              <div class="pt-2 border-t border-slate-100 sm:col-span-2"></div>
+
+              <!-- Radicación -->
               <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">Provincia de Radicación *</label>
                 <select id="client-provincia" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white" onchange="triggerFormUpdate()">
@@ -153,6 +173,49 @@
               <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">Localidad / Municipio *</label>
                 <input type="text" id="client-city" placeholder="Ej: Capital, Goya, Resistencia..." value="Corrientes Capital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
+              </div>
+              
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-semibold text-slate-600 mb-1">Registro Seccional de Radicación *</label>
+                <select id="client-seccional" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 outline-none transition" onchange="triggerFormUpdate()">
+                  <optgroup label="Corrientes Capital">
+                    <option value="Corrientes Nº 1">Corrientes Nº 1</option>
+                    <option value="Corrientes Nº 2">Corrientes Nº 2</option>
+                    <option value="Corrientes Nº 3">Corrientes Nº 3</option>
+                    <option value="Corrientes Nº 4">Corrientes Nº 4</option>
+                    <option value="Corrientes Motovehículos A">Corrientes Motos "A"</option>
+                    <option value="Corrientes Motovehículos B">Corrientes Motos "B"</option>
+                    <option value="Corrientes Motovehículos C">Corrientes Motos "C"</option>
+                    <option value="Corrientes Maquinaria Agrícola">Corrientes Maq. Agrícola</option>
+                  </optgroup>
+                  <optgroup label="Goya">
+                    <option value="Goya Nº 1">Goya Nº 1</option>
+                    <option value="Goya Nº 2">Goya Nº 2</option>
+                    <option value="Goya Motovehículos A">Goya Motos "A"</option>
+                    <option value="Goya Motovehículos B">Goya Motos "B"</option>
+                  </optgroup>
+                  <optgroup label="Paso de los Libres">
+                    <option value="Paso de los Libres Nº 1">Paso de los Libres Nº 1</option>
+                    <option value="Paso de los Libres Motovehículos A">Paso de los Libres Motos "A"</option>
+                  </optgroup>
+                  <optgroup label="Curuzú Cuatiá & Mercedes">
+                    <option value="Curuzú Cuatiá Nº 1">Curuzú Cuatiá Nº 1</option>
+                    <option value="Curuzú Cuatiá Motovehículos A">Curuzú Cuatiá Motos "A"</option>
+                    <option value="Mercedes Nº 1">Mercedes Nº 1</option>
+                    <option value="Mercedes Motovehículos A">Mercedes Motos "A"</option>
+                  </optgroup>
+                  <optgroup label="Otras Localidades">
+                    <option value="Bella Vista Nº 1">Bella Vista Nº 1</option>
+                    <option value="Esquina Nº 1">Esquina Nº 1</option>
+                    <option value="Ituzaingó Nº 1">Ituzaingó Nº 1</option>
+                    <option value="Gdor. Virasoro Nº 1">Gdor. Virasoro Nº 1</option>
+                    <option value="Santo Tomé Nº 1">Santo Tomé Nº 1</option>
+                    <option value="Monte Caseros Nº 1">Monte Caseros Nº 1</option>
+                  </optgroup>
+                  <optgroup label="Fuera de la Provincia">
+                    <option value="Otro / Extraprovincial">Otro / Extraprovincial</option>
+                  </optgroup>
+                </select>
               </div>
             </div>
           </div>
@@ -232,7 +295,8 @@
                   <label class="block text-xs font-semibold text-slate-600 mb-1">Valuación DNRPA ($) *</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 font-bold text-xs">$</span>
-                    <input type="number" id="vehicle-valuation" value="0" step="10000" class="w-full pl-7 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none font-bold text-slate-900" oninput="triggerFormUpdate()">
+                    <!-- NUEVO: oninput llama a la función de autocalcular DGR -->
+                    <input type="number" id="vehicle-valuation" value="0" step="10000" class="w-full pl-7 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none font-bold text-slate-900" oninput="onValuationChange()">
                   </div>
                 </div>
               </div>
@@ -352,7 +416,7 @@
           </div>
 
           <!-- Printable Preview -->
-          <div class="bg-white rounded-2xl border border-slate-300 shadow-md p-6 text-slate-800" id="printable-budget">
+          <div class="bg-white rounded-2xl border border-slate-300 shadow-md p-6 text-slate-800 relative" id="printable-budget">
             <div class="border-b-2 border-slate-900 pb-4 flex justify-between items-start">
               <div>
                 <h2 class="text-base font-extrabold text-slate-900 uppercase">GESTORÍA AUTOMOTOR</h2>
@@ -365,9 +429,10 @@
               </div>
             </div>
 
+            <!-- Datos Titular y Vehículo -->
             <div class="my-4 grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
               <div>
-                <span class="text-[10px] text-slate-400 uppercase font-semibold block">Cliente</span>
+                <span class="text-[10px] text-slate-400 uppercase font-semibold block">Cliente Titular</span>
                 <strong id="preview-client" class="text-slate-800 font-bold block truncate">...</strong>
                 <span id="preview-loc" class="text-slate-500 block text-[11px]">Radicación: ...</span>
               </div>
@@ -378,11 +443,19 @@
                 <span class="text-slate-500 block text-[10px] mt-0.5" id="preview-val-str">Valuación: $...</span>
               </div>
             </div>
+            
+            <!-- NUEVO: Datos Cónyuge en PDF -->
+            <div id="preview-spouse-section" class="hidden mb-4 p-2.5 rounded-lg border border-slate-200 text-xs bg-white">
+              <span class="text-[10px] text-slate-400 uppercase font-semibold block">Cónyuge / Co-Titular</span>
+              <strong id="preview-spouse-name" class="text-slate-800 block">...</strong>
+              <span id="preview-spouse-dni" class="text-slate-500 block text-[11px]">DNI: ...</span>
+            </div>
 
             <div class="mb-3 px-3 py-1.5 bg-blue-50 text-blue-900 rounded-md border border-blue-200 text-xs flex justify-between items-center">
               <span class="font-semibold" id="preview-tramite-name">Trámite...</span>
             </div>
 
+            <!-- Tabla de Costos -->
             <div class="space-y-1.5 text-xs">
               <div class="flex justify-between py-1 border-b border-slate-100">
                 <span class="text-slate-600">Arancel Registro DNRPA (<span id="prev-dnrpa-rate">0</span>%):</span>
@@ -427,6 +500,31 @@
                 <h3 class="text-xl font-extrabold text-white" id="prev-total-general">$0</h3>
               </div>
             </div>
+
+            <!-- NUEVO: Documentación en PDF -->
+            <div id="prev-docs-section" class="mt-5 pt-4 border-t border-slate-200 hidden">
+              <h4 class="text-[11px] font-bold text-slate-800 uppercase mb-2">Estado de Documentación a Presentar</h4>
+              <ul id="prev-docs-list" class="text-[10px] space-y-1.5">
+                <!-- Se inyecta por JS -->
+              </ul>
+            </div>
+
+            <!-- NUEVO: Firmas -->
+            <div class="mt-12 pt-8 flex justify-between items-end text-center">
+              <div class="w-[45%]">
+                <div class="border-t border-slate-400 pt-2">
+                  <p class="text-[11px] font-bold text-slate-800">Firma del Titular / Cliente</p>
+                  <p class="text-[9px] text-slate-500">Aclaración y DNI</p>
+                </div>
+              </div>
+              <div class="w-[45%]" id="prev-spouse-signature" style="display: none;">
+                <div class="border-t border-slate-400 pt-2">
+                  <p class="text-[11px] font-bold text-slate-800">Firma Cónyuge / Co-Titular</p>
+                  <p class="text-[9px] text-slate-500">Aclaración y DNI</p>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>
@@ -453,8 +551,7 @@
         { id: "doc_08", name: "Formulario 08 (Firmado y Certificado)", default: true },
         { id: "doc_f12", name: "Verificación Policial F-12", default: true },
         { id: "doc_dni", name: "DNI Comprador y Vendedor", default: true },
-        { id: "doc_cuil", name: "Constancia CUIL / CUIT", default: true },
-        { id: "doc_ceta", name: "Certificado CETA AFIP", default: false }
+        { id: "doc_cuil", name: "Constancia CUIL / CUIT", default: true }
       ],
       inscripcion_inicial: [
         { id: "doc_factura", name: "Factura de Compra Concesionaria", default: true },
@@ -548,16 +645,14 @@
       ]
     };
 
-    // Función para renderizar e inyectar el HTML de los checklist
     function initChecklist(procedureKey) {
       const container = document.getElementById('document-checklist-container');
       container.innerHTML = '';
-      currentDocStatus = {}; // Se limpia el estado únicamente al cambiar el trámite general
+      currentDocStatus = {}; 
 
       const docs = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
 
       docs.forEach(item => {
-        // Se asume el estado por defecto del documento
         currentDocStatus[item.id] = item.default ? 'pendiente' : 'no_aplica';
 
         const row = document.createElement('div');
@@ -575,7 +670,6 @@
       updateDocBadge();
     }
 
-    // Actualiza el CSS visual de un botón sin borrar ni recargar la lista
     function setDocState(docId, state) {
       currentDocStatus[docId] = state;
       
@@ -594,9 +688,9 @@
       });
       
       updateDocBadge();
+      triggerFormUpdate(); // Para que el PDF actualice en vivo
     }
 
-    // Actualiza el contador de recibidos
     function updateDocBadge() {
       const keys = Object.keys(currentDocStatus);
       const total = keys.filter(k => currentDocStatus[k] !== 'no_aplica').length;
@@ -604,12 +698,10 @@
       document.getElementById('doc-progress-badge').textContent = `${recibidos} de ${total} Entregados`;
     }
 
-    // Cuando cambia el tipo de trámite
     function onProcedureChange() {
       const procedure = document.getElementById('procedure-type').value;
       initChecklist(procedure);
 
-      // Reseteos condicionales rápidos
       if (['informe_dominio', 'duplicado_cedula', 'cedula_autorizado', 'reposicion_placas', 'certificado_ceta'].includes(procedure)) {
         document.getElementById('tax-dnrpa-rate').value = 0;
         document.getElementById('tax-dgr-rate').value = 0;
@@ -620,23 +712,44 @@
       } else {
         const origin = document.getElementById('vehicle-origin').value;
         document.getElementById('tax-dnrpa-rate').value = origin === 'importado' ? 2.0 : 1.5;
-        document.getElementById('tax-dgr-rate').value = 1.5;
+        // El DGR se auto calculará por la valuacion, pero aseguramos la base
+        onValuationChange();
         onVehicleTypeChange(); 
       }
       triggerFormUpdate();
     }
 
-    // Función general de recalculo
+    // NUEVO: Función para autocalcular DGR según la valuación ingresada
+    function onValuationChange() {
+      const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
+      const proc = document.getElementById('procedure-type').value;
+      
+      // Si el trámite no es de transferencia o inicial, no se toca el DGR
+      if (['transferencia', 'inscripcion_inicial', 'inscripcion_prenda'].includes(proc)) {
+        if (vVal > 15000000) {
+          document.getElementById('tax-dgr-rate').value = 2.0;
+        } else {
+          document.getElementById('tax-dgr-rate').value = 1.5;
+        }
+      }
+      triggerFormUpdate();
+    }
+
     function recalcAndRender() {
+      // Datos Cliente
       const prov = document.getElementById('client-provincia').value;
       const city = document.getElementById('client-city').value || "-";
+      const seccional = document.getElementById('client-seccional').value || "-";
+      const spouseName = document.getElementById('client-spouse').value.trim();
+      const spouseDni = document.getElementById('client-spouse-dni').value.trim();
       
+      // Datos Vehículo
       const vDom = document.getElementById('vehicle-dominio').value || "S/D";
       const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
       
+      // Tasas
       const dnrpaRate = parseFloat(document.getElementById('tax-dnrpa-rate').value) || 0;
       const dgrRate = parseFloat(document.getElementById('tax-dgr-rate').value) || 0;
-      
       const forms = parseFloat(document.getElementById('cost-forms-fixed').value) || 0;
       const f12 = parseFloat(document.getElementById('cost-f12-verif').value) || 0;
       const acor = parseFloat(document.getElementById('cost-acor-tax').value) || 0;
@@ -645,22 +758,39 @@
       const honBase = parseFloat(document.getElementById('honorario-base').value) || 0;
       const comp = parseFloat(document.getElementById('honorario-complexity').value) || 1.0;
 
+      // Cálculos
       const dnrpaAmt = Math.round(vVal * (dnrpaRate / 100));
       const dgrAmt = Math.round(vVal * (dgrRate / 100));
       const subRegistral = dnrpaAmt + dgrAmt + forms + f12 + acor;
       const honTotal = Math.round(honBase * comp);
       const totalGeneral = subRegistral + honTotal - discount;
 
+      // ACTUALIZACIÓN DE LA BOLETA PDF
       document.getElementById('preview-budget-id').textContent = `#${activeBudgetId}`;
       document.getElementById('preview-date').textContent = new Date().toLocaleDateString('es-AR');
-      document.getElementById('preview-client').textContent = document.getElementById('client-name').value || 'Consumidor Final';
-      document.getElementById('preview-loc').textContent = `Rad: ${city}, ${prov}`;
       
+      document.getElementById('preview-client').textContent = document.getElementById('client-name').value || 'Consumidor Final';
+      document.getElementById('preview-loc').textContent = `Rad: ${city}, ${prov} - Secc: ${seccional}`;
+      
+      // Lógica de Cónyuge/Co-titular en el PDF
+      const spouseSection = document.getElementById('preview-spouse-section');
+      const spouseSignature = document.getElementById('preview-spouse-signature');
+      if (spouseName !== '') {
+        spouseSection.classList.remove('hidden');
+        spouseSignature.style.display = 'block';
+        document.getElementById('preview-spouse-name').textContent = spouseName;
+        document.getElementById('preview-spouse-dni').textContent = `DNI: ${spouseDni}`;
+      } else {
+        spouseSection.classList.add('hidden');
+        spouseSignature.style.display = 'none';
+      }
+
       document.getElementById('preview-veh').textContent = document.getElementById('vehicle-model').value || 'Vehículo sin especificar';
       document.getElementById('preview-patente').textContent = vDom.toUpperCase();
       document.getElementById('preview-val-str').textContent = `Valuación DNRPA: $${formatCurrency(vVal)}`;
       
       const selProc = document.getElementById('procedure-type');
+      const procedureKey = selProc.value;
       document.getElementById('preview-tramite-name').textContent = selProc.options[selProc.selectedIndex].text;
       
       document.getElementById('prev-dnrpa-rate').textContent = dnrpaRate;
@@ -684,6 +814,7 @@
         document.getElementById('row-prev-discount').classList.add('hidden');
       }
 
+      // KPIs
       document.getElementById('val-dnrpa-calculated').textContent = `$${formatCurrency(dnrpaAmt)}`;
       document.getElementById('val-dgr-calculated').textContent = `$${formatCurrency(dgrAmt)}`;
       document.getElementById('kpi-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
@@ -695,6 +826,33 @@
       let anticipo = aType === 'gastos' ? subRegistral : (aType === '50percent' ? totalGeneral / 2 : subRegistral + (honTotal/2));
       document.getElementById('val-anticipo').textContent = `$${formatCurrency(anticipo)}`;
       document.getElementById('prev-anticipo-label').textContent = `Anticipo sugerido: $${formatCurrency(anticipo)}`;
+
+      // NUEVO: Documentos al PDF
+      const prevDocsList = document.getElementById('prev-docs-list');
+      prevDocsList.innerHTML = '';
+      const docsToPrint = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
+      let activeDocsCount = 0;
+
+      docsToPrint.forEach(item => {
+        const state = currentDocStatus[item.id] || 'pendiente';
+        if (state !== 'no_aplica') {
+          activeDocsCount++;
+          const li = document.createElement('li');
+          li.className = "flex justify-between items-center py-1 border-b border-slate-100 last:border-0";
+          let statusHtml = '';
+          if (state === 'recibido') statusHtml = '<span class="text-emerald-600 font-bold bg-emerald-50 px-1.5 py-0.5 rounded">✔ Recibido</span>';
+          if (state === 'pendiente') statusHtml = '<span class="text-amber-500 font-bold bg-amber-50 px-1.5 py-0.5 rounded">⏳ Pendiente</span>';
+          li.innerHTML = `<span class="text-slate-600 w-3/4 truncate">${item.name}</span> <span>${statusHtml}</span>`;
+          prevDocsList.appendChild(li);
+        }
+      });
+      
+      const docSection = document.getElementById('prev-docs-section');
+      if (activeDocsCount > 0) {
+        docSection.classList.remove('hidden');
+      } else {
+        docSection.classList.add('hidden');
+      }
     }
 
     function onVehicleTypeChange() {
