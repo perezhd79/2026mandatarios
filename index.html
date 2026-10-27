@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestoría Automotor - Sistema Inteligente de Presupuestos</title>
   
-  <!-- Meta tags para instalación como App nativa en móviles -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,12 +16,12 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- html2pdf.js for direct client-side PDF export -->
+  <!-- html2pdf.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <script>
     tailwind.config = {
-      darkMode: 'media', // Automático según el dispositivo del usuario
+      darkMode: 'media',
       theme: {
         extend: {
           fontFamily: { sans: ['Inter', 'sans-serif'] },
@@ -67,7 +66,6 @@
     <i class="fa-solid fa-arrow-up text-lg"></i>
   </button>
 
-  <!-- Main Navigation Bar -->
   <header class="bg-slate-900 text-white border-b border-slate-800 sticky top-0 z-30 shadow-md">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
       <div class="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -82,7 +80,7 @@
         </div>
       </div>
       <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <button onclick="switchView('creator')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-brand-600 text-white hover:bg-brand-500 transition shadow-sm flex items-center gap-1.5">
+        <button onclick="createNewBudget()" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-brand-600 text-white hover:bg-brand-500 transition shadow-sm flex items-center gap-1.5">
           <i class="fa-solid fa-calculator text-xs sm:text-sm"></i> <span class="hidden sm:inline">Nuevo</span>
         </button>
         <button onclick="switchView('history')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center gap-1.5">
@@ -147,7 +145,6 @@
               </div>
             </div>
             <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <!-- Datos Titular -->
               <div>
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Nombre y Apellido *</label>
                 <div class="relative">
@@ -163,20 +160,18 @@
                 </div>
               </div>
 
-              <!-- NUEVO: Estado Civil y Asentimiento -->
               <div class="pt-2 border-t border-slate-100 dark:border-slate-700 sm:col-span-2"></div>
               
               <div class="sm:col-span-2">
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Estado Civil *</label>
-                <select id="client-marital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" onchange="toggleSpouseFields(); triggerFormUpdate();">
+                <select id="client-marital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" onchange="toggleSpouseFields(); initChecklist(document.getElementById('procedure-type').value); triggerFormUpdate();">
                   <option value="soltero" selected>Soltero/a</option>
-                  <option value="casado">Casado/a (Requiere Asentimiento Conyugal)</option>
+                  <option value="casado">Casado/a (Posible Asentimiento Conyugal)</option>
                   <option value="divorciado">Divorciado/a</option>
                   <option value="viudo">Viudo/a</option>
                 </select>
               </div>
 
-              <!-- Campos dinámicos del cónyuge -->
               <div id="spouse-fields" class="hidden sm:col-span-2 grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Nombre del Cónyuge *</label>
@@ -193,7 +188,6 @@
 
               <div class="pt-2 border-t border-slate-100 dark:border-slate-700 sm:col-span-2"></div>
 
-              <!-- Radicación -->
               <div>
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Provincia de Radicación *</label>
                 <select id="client-provincia" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" onchange="triggerFormUpdate()">
@@ -206,7 +200,7 @@
               </div>
               <div>
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Localidad / Municipio *</label>
-                <input type="text" id="client-city" placeholder="Ej: Capital, Goya, Resistencia..." value="Corrientes Capital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" oninput="triggerFormUpdate()">
+                <input type="text" id="client-city" placeholder="Ej: Capital, Goya..." value="Corrientes Capital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" oninput="triggerFormUpdate()">
               </div>
               
               <div class="sm:col-span-2">
@@ -335,7 +329,7 @@
             </div>
           </div>
 
-          <!-- Card 3: Checklist Documental Inteligente -->
+          <!-- Card 3: Checklist Documental -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden transition-colors">
             <div class="px-5 py-4 bg-slate-50/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
               <div class="flex items-center gap-2">
@@ -346,7 +340,7 @@
             </div>
             <div class="p-5">
               <div id="document-checklist-container" class="space-y-2.5 text-sm">
-                <!-- Dynamically injected checklist items via JS -->
+                <!-- Dynamically injected -->
               </div>
             </div>
           </div>
@@ -377,18 +371,24 @@
                     </div>
                   </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-200 dark:border-slate-600">
+                <!-- GRID AMPLIADA PARA INCLUIR ESCRIBANO -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-200 dark:border-slate-600">
                   <div>
                     <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Formularios Oficiales ($)</label>
                     <input type="number" id="cost-forms-fixed" value="38500" step="1000" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-medium" oninput="triggerFormUpdate()">
                   </div>
                   <div>
-                    <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Verificaciones / Extras ($)</label>
+                    <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Verificaciones / F12 ($)</label>
                     <input type="number" id="cost-f12-verif" value="26000" step="1000" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-medium" oninput="triggerFormUpdate()">
                   </div>
                   <div>
-                    <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Tasas Municipales / ACOR ($)</label>
+                    <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Municipal / ACOR ($)</label>
                     <input type="number" id="cost-acor-tax" value="9500" step="500" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-medium" oninput="triggerFormUpdate()">
+                  </div>
+                  <!-- NUEVO: CAMPO ESCRIBANO -->
+                  <div>
+                    <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Escribano / Certif. ($)</label>
+                    <input type="number" id="cost-escribano" value="0" step="1000" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-medium" oninput="triggerFormUpdate()" placeholder="Opcional">
                   </div>
                 </div>
               </div>
@@ -438,10 +438,10 @@
               <span>Imprimir / Descargar PDF</span>
             </button>
             <div class="grid grid-cols-2 gap-2">
-              <button type="button" onclick="alert('Funcionalidad de guardado en memoria activa.')" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 text-white font-medium text-xs flex items-center justify-center gap-2">
-                <i class="fa-solid fa-floppy-disk"></i> Guardar
+              <button type="button" onclick="manualSaveCurrentBudget()" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 dark:bg-slate-700 hover:bg-slate-800 text-white font-medium text-xs flex items-center justify-center gap-2 transition-transform active:scale-95">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar Historial
               </button>
-              <button type="button" onclick="sendViaWhatsApp()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2">
+              <button type="button" onclick="sendViaWhatsApp()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-transform active:scale-95">
                 <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
               </button>
             </div>
@@ -502,13 +502,20 @@
                 <span class="font-semibold text-slate-800" id="prev-forms-amt">$0</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-100">
-                <span class="text-slate-600">Verificación / Certificaciones:</span>
+                <span class="text-slate-600">Verificación / Certificaciones (F12):</span>
                 <span class="font-semibold text-slate-800" id="prev-verif-amt">$0</span>
               </div>
               <div class="flex justify-between py-1 border-b border-slate-100">
                 <span class="text-slate-600">Tasas Municipales / ACOR:</span>
                 <span class="font-semibold text-slate-800" id="prev-acor-amt">$0</span>
               </div>
+              
+              <!-- NUEVO RENGLÓN ESCRIBANO PDF -->
+              <div id="row-prev-escribano" class="hidden justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-600">Escribano / Certificaciones Extra:</span>
+                <span class="font-semibold text-slate-800" id="prev-escribano-amt">$0</span>
+              </div>
+
               <div id="row-prev-discount" class="hidden justify-between py-1 border-b border-slate-100 text-rose-600">
                 <span>Bonificaciones:</span>
                 <span class="font-semibold" id="prev-discount-amt">-$0</span>
@@ -562,16 +569,21 @@
       </div>
     </div>
     
+    <!-- VISTA DEL HISTORIAL -->
     <div id="view-history" class="space-y-6 hidden">
-        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm text-center">
-            <h2 class="text-lg font-bold text-slate-900 dark:text-white">Historial de Presupuestos</h2>
-            <p class="text-slate-500 dark:text-slate-400 text-sm">Vista disponible en construcción.</p>
+        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+              <h2 class="text-lg font-bold text-slate-900 dark:text-white">Base de Datos - Presupuestos Guardados</h2>
+            </div>
+            <div id="history-table-container">
+              <!-- Renderizado por JS -->
+            </div>
         </div>
     </div>
   </main>
 
   <script>
-    // Scroll-to-top logic
+    // 1. Funcionalidades UI (Toasts y Loaders)
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('btn-back-to-top');
       if (window.scrollY > 300) {
@@ -583,13 +595,27 @@
       }
     });
 
-    // Loader Function para Exportación
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      let bgClass = type === 'success' ? 'bg-emerald-600' : (type === 'error' ? 'bg-rose-600' : 'bg-brand-600');
+      
+      toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 text-xs font-medium transition-all duration-300 transform translate-y-2 opacity-0`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-info text-lg"></i><span>${message}</span>`;
+      
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
     function executeDocumentExport(targetAction) {
       const loader = document.getElementById('loader-overlay');
       loader.classList.remove('hidden');
       setTimeout(() => loader.classList.remove('opacity-0'), 10);
       
-      // Simulamos la carga antes de imprimir
       setTimeout(() => {
         loader.classList.add('opacity-0');
         setTimeout(() => loader.classList.add('hidden'), 300);
@@ -607,13 +633,15 @@
           };
           html2pdf().set(opt).from(element).save();
         }
-      }, 1500); // 1.5 segundos de "procesamiento"
+      }, 1500); 
     }
 
-    // Estado y variables globales
+    // 2. Variables Globales
     let currentDocStatus = {};
     let activeBudgetId = "PRE-" + Math.floor(Math.random() * 89999 + 10000);
+    let budgetHistory = JSON.parse(localStorage.getItem('gestorAutoBudgets')) || [];
 
+    // 3. Diccionario Base
     const PROCEDURE_DOCUMENTS = {
       transferencia: [
         { id: "doc_titulo", name: "Título de Propiedad Automotor", default: true },
@@ -711,15 +739,26 @@
       ]
     };
 
+    // 4. Lógica de Asentimiento Conyugal
     function initChecklist(procedureKey) {
       const container = document.getElementById('document-checklist-container');
       container.innerHTML = '';
+      
+      const oldStatus = { ...currentDocStatus };
       currentDocStatus = {}; 
 
-      const docs = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
+      const baseDocs = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
+      let docs = JSON.parse(JSON.stringify(baseDocs));
+
+      const marital = document.getElementById('client-marital')?.value || 'soltero';
+      const tramitesConAsentimiento = ['transferencia', 'inscripcion_prenda', 'baja_unidad'];
+      
+      if (marital === 'casado' && tramitesConAsentimiento.includes(procedureKey)) {
+        docs.splice(2, 0, { id: "doc_asentimiento", name: "Firma Cónyuge (Asentimiento) y Fotocopia DNI", default: true });
+      }
 
       docs.forEach(item => {
-        currentDocStatus[item.id] = item.default ? 'pendiente' : 'no_aplica';
+        currentDocStatus[item.id] = oldStatus[item.id] || (item.default ? 'pendiente' : 'no_aplica');
 
         const row = document.createElement('div');
         row.className = "flex flex-col sm:flex-row sm:items-center justify-between p-2.5 sm:p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 gap-3 transition-colors";
@@ -738,12 +777,16 @@
 
     function setDocState(docId, state) {
       currentDocStatus[docId] = state;
-      
+      setDocStateUI(docId, state);
+      updateDocBadge();
+      triggerFormUpdate(); 
+    }
+
+    function setDocStateUI(docId, state) {
       const states = ['recibido', 'pendiente', 'no_aplica'];
       states.forEach(s => {
         const btn = document.getElementById(`btn-doc-${docId}-${s}`);
         if (!btn) return;
-        
         if (s === state) {
           if (s === 'recibido') btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-emerald-600 text-white shadow-sm';
           if (s === 'pendiente') btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-amber-500 text-white shadow-sm';
@@ -752,9 +795,6 @@
           btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-white dark:bg-slate-700 border border-slate-300 dark:border-slate-500 text-slate-600 dark:text-slate-300';
         }
       });
-      
-      updateDocBadge();
-      triggerFormUpdate(); 
     }
 
     function updateDocBadge() {
@@ -787,6 +827,7 @@
         document.getElementById('tax-dgr-rate').value = 0;
         document.getElementById('cost-f12-verif').value = 0;
         document.getElementById('cost-acor-tax').value = 0;
+        document.getElementById('cost-escribano').value = 0;
         document.getElementById('cost-forms-fixed').value = 20000;
         document.getElementById('honorario-base').value = 35000;
       } else {
@@ -801,7 +842,6 @@
     function onValuationChange() {
       const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
       const proc = document.getElementById('procedure-type').value;
-      
       if (['transferencia', 'inscripcion_inicial', 'inscripcion_prenda'].includes(proc)) {
         if (vVal > 15000000) {
           document.getElementById('tax-dgr-rate').value = 2.0;
@@ -812,6 +852,7 @@
       triggerFormUpdate();
     }
 
+    // 5. Cálculos Finales
     function recalcAndRender() {
       const prov = document.getElementById('client-provincia').value;
       const city = document.getElementById('client-city').value || "-";
@@ -829,6 +870,7 @@
       const forms = parseFloat(document.getElementById('cost-forms-fixed').value) || 0;
       const f12 = parseFloat(document.getElementById('cost-f12-verif').value) || 0;
       const acor = parseFloat(document.getElementById('cost-acor-tax').value) || 0;
+      const escribano = parseFloat(document.getElementById('cost-escribano').value) || 0;
       const discount = parseFloat(document.getElementById('cost-discount').value) || 0;
       
       const honBase = parseFloat(document.getElementById('honorario-base').value) || 0;
@@ -836,25 +878,35 @@
 
       const dnrpaAmt = Math.round(vVal * (dnrpaRate / 100));
       const dgrAmt = Math.round(vVal * (dgrRate / 100));
-      const subRegistral = dnrpaAmt + dgrAmt + forms + f12 + acor;
+      
+      // Sumamos el escribano al subtotal de gastos
+      const subRegistral = dnrpaAmt + dgrAmt + forms + f12 + acor + escribano;
       const honTotal = Math.round(honBase * comp);
       const totalGeneral = subRegistral + honTotal - discount;
 
-      // ACTUALIZACIÓN DE LA BOLETA PDF
+      // ACTUALIZACIÓN BOLETA PDF
       document.getElementById('preview-budget-id').textContent = `#${activeBudgetId}`;
       document.getElementById('preview-date').textContent = new Date().toLocaleDateString('es-AR');
       
       document.getElementById('preview-client').textContent = document.getElementById('client-name').value || 'Consumidor Final';
       document.getElementById('preview-loc').textContent = `Rad: ${city}, ${prov} - Secc: ${seccional}`;
       
-      // Asentimiento Conyugal PDF Logic
+      const selProc = document.getElementById('procedure-type');
+      const procedureKey = selProc.value;
+      const requiresConsent = ['transferencia', 'inscripcion_prenda', 'baja_unidad'].includes(procedureKey);
+      
       const spouseSection = document.getElementById('preview-spouse-section');
       const spouseSignature = document.getElementById('preview-spouse-signature');
+      
       if (marital === 'casado' && spouseName !== '') {
         spouseSection.classList.remove('hidden');
-        spouseSignature.style.display = 'block';
         document.getElementById('preview-spouse-name').textContent = spouseName;
         document.getElementById('preview-spouse-dni').textContent = `DNI: ${spouseDni}`;
+        if (requiresConsent) {
+          spouseSignature.style.display = 'block';
+        } else {
+          spouseSignature.style.display = 'none';
+        }
       } else {
         spouseSection.classList.add('hidden');
         spouseSignature.style.display = 'none';
@@ -864,18 +916,25 @@
       document.getElementById('preview-patente').textContent = vDom.toUpperCase();
       document.getElementById('preview-val-str').textContent = `Valuación DNRPA: $${formatCurrency(vVal)}`;
       
-      const selProc = document.getElementById('procedure-type');
-      const procedureKey = selProc.value;
       document.getElementById('preview-tramite-name').textContent = selProc.options[selProc.selectedIndex].text;
       
       document.getElementById('prev-dnrpa-rate').textContent = dnrpaRate;
       document.getElementById('prev-dgr-rate').textContent = dgrRate;
-      
       document.getElementById('prev-dnrpa-amt').textContent = `$${formatCurrency(dnrpaAmt)}`;
       document.getElementById('prev-dgr-amt').textContent = `$${formatCurrency(dgrAmt)}`;
       document.getElementById('prev-forms-amt').textContent = `$${formatCurrency(forms)}`;
       document.getElementById('prev-verif-amt').textContent = `$${formatCurrency(f12)}`;
       document.getElementById('prev-acor-amt').textContent = `$${formatCurrency(acor)}`;
+      
+      // Control PDF Escribano
+      if (escribano > 0) {
+        document.getElementById('row-prev-escribano').classList.remove('hidden');
+        document.getElementById('row-prev-escribano').classList.add('flex');
+        document.getElementById('prev-escribano-amt').textContent = `$${formatCurrency(escribano)}`;
+      } else {
+        document.getElementById('row-prev-escribano').classList.add('hidden');
+        document.getElementById('row-prev-escribano').classList.remove('flex');
+      }
       
       document.getElementById('prev-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
       document.getElementById('prev-honorarios-amt').textContent = `$${formatCurrency(honTotal)}`;
@@ -905,21 +964,25 @@
       // Inyectar documentos al PDF
       const prevDocsList = document.getElementById('prev-docs-list');
       prevDocsList.innerHTML = '';
-      const docsToPrint = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
       let activeDocsCount = 0;
 
-      docsToPrint.forEach(item => {
-        const state = currentDocStatus[item.id] || 'pendiente';
-        if (state !== 'no_aplica') {
+      const containerNodes = document.getElementById('document-checklist-container').querySelectorAll('span.leading-snug');
+      const displayedDocNames = Array.from(containerNodes).map(node => node.textContent);
+      
+      let docIndex = 0;
+      Object.keys(currentDocStatus).forEach(docId => {
+        const state = currentDocStatus[docId];
+        if (state !== 'no_aplica' && displayedDocNames[docIndex]) {
           activeDocsCount++;
           const li = document.createElement('li');
           li.className = "flex justify-between items-center py-1 border-b border-slate-100 last:border-0";
           let statusHtml = '';
           if (state === 'recibido') statusHtml = '<span class="text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">✔ Recibido</span>';
           if (state === 'pendiente') statusHtml = '<span class="text-amber-600 font-bold bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">⏳ Pendiente</span>';
-          li.innerHTML = `<span class="text-slate-700 w-3/4 truncate">${item.name}</span> <span>${statusHtml}</span>`;
+          li.innerHTML = `<span class="text-slate-700 w-3/4 truncate">${displayedDocNames[docIndex]}</span> <span>${statusHtml}</span>`;
           prevDocsList.appendChild(li);
         }
+        docIndex++;
       });
       
       const docSection = document.getElementById('prev-docs-section');
@@ -959,6 +1022,7 @@
 
     function triggerFormUpdate() { recalcAndRender(); }
     function formatCurrency(n) { return new Intl.NumberFormat('es-AR').format(n); }
+    
     function switchView(view) {
         if(view === 'creator') {
             document.getElementById('view-creator').classList.remove('hidden');
@@ -966,11 +1030,193 @@
         } else {
             document.getElementById('view-creator').classList.add('hidden');
             document.getElementById('view-history').classList.remove('hidden');
+            renderHistoryTable(); 
         }
     }
-    function sendViaWhatsApp() { alert("Simulando envío a WhatsApp"); }
+    
+    function sendViaWhatsApp() { 
+      const tel = document.getElementById('client-phone')?.value?.replace(/\D/g,'') || '';
+      const total = document.getElementById('prev-total-general').innerText;
+      const texto = `Hola, adjunto el detalle del presupuesto automotor. Total estimado: ${total}`;
+      window.open(`https://wa.me/549${tel}?text=${encodeURIComponent(texto)}`, '_blank'); 
+    }
 
-    // Inicializar
+    // 6. Base de Datos (LocalStorage)
+    function manualSaveCurrentBudget() {
+      const id = activeBudgetId;
+      const date = new Date().toLocaleDateString('es-AR', { hour: '2-digit', minute:'2-digit' });
+      const tramiteTexto = document.getElementById('procedure-type').options[document.getElementById('procedure-type').selectedIndex].text;
+      const total = document.getElementById('prev-total-general').innerText;
+
+      const budgetData = {
+        id: id,
+        date: date,
+        clientName: document.getElementById('client-name').value,
+        clientDni: document.getElementById('client-dni').value,
+        marital: document.getElementById('client-marital').value,
+        spouseName: document.getElementById('client-spouse').value,
+        spouseDni: document.getElementById('client-spouse-dni').value,
+        provincia: document.getElementById('client-provincia').value,
+        city: document.getElementById('client-city').value,
+        seccional: document.getElementById('client-seccional').value,
+        vType: document.getElementById('vehicle-type').value,
+        procType: document.getElementById('procedure-type').value,
+        dominio: document.getElementById('vehicle-dominio').value,
+        model: document.getElementById('vehicle-model').value,
+        origin: document.getElementById('vehicle-origin').value,
+        valuation: document.getElementById('vehicle-valuation').value,
+        docStatus: currentDocStatus, 
+        taxDnrpa: document.getElementById('tax-dnrpa-rate').value,
+        taxDgr: document.getElementById('tax-dgr-rate').value,
+        forms: document.getElementById('cost-forms-fixed').value,
+        f12: document.getElementById('cost-f12-verif').value,
+        acor: document.getElementById('cost-acor-tax').value,
+        escribano: document.getElementById('cost-escribano').value,
+        honBase: document.getElementById('honorario-base').value,
+        honComp: document.getElementById('honorario-complexity').value,
+        discount: document.getElementById('cost-discount').value,
+        anticipoType: document.getElementById('anticipo-type').value,
+        summaryTramite: tramiteTexto,
+        summaryTotal: total
+      };
+
+      const existingIndex = budgetHistory.findIndex(b => b.id === id);
+      if (existingIndex > -1) {
+        budgetHistory[existingIndex] = budgetData; 
+      } else {
+        budgetHistory.unshift(budgetData); 
+      }
+
+      localStorage.setItem('gestorAutoBudgets', JSON.stringify(budgetHistory));
+      showToast('Presupuesto guardado correctamente', 'success');
+    }
+
+    function createNewBudget() {
+       activeBudgetId = "PRE-" + Math.floor(Math.random() * 89999 + 10000);
+       document.querySelectorAll('input[type="text"]').forEach(input => input.value = '');
+       document.getElementById('client-marital').value = 'soltero';
+       toggleSpouseFields();
+       document.getElementById('vehicle-valuation').value = '0';
+       document.getElementById('cost-escribano').value = '0';
+       document.getElementById('cost-discount').value = '0';
+       
+       onProcedureChange(); 
+       switchView('creator');
+       showToast('Nuevo presupuesto en blanco', 'info');
+    }
+
+    function renderHistoryTable() {
+      const container = document.getElementById('history-table-container');
+      if (!container) return;
+
+      if (budgetHistory.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-500 dark:text-slate-400">
+          <i class="fa-solid fa-folder-open text-5xl mb-4 opacity-50"></i>
+          <p class="text-sm font-medium">No hay presupuestos guardados en el historial.</p>
+        </div>`;
+        return;
+      }
+
+      let html = `<div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+        <table class="w-full text-left border-collapse whitespace-nowrap">
+        <thead>
+          <tr class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-[11px] uppercase tracking-wider">
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">ID / Fecha</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Cliente</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Vehículo</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Trámite</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Total Estimado</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-xs text-slate-800 dark:text-slate-200">`;
+      
+      budgetHistory.forEach(b => {
+        html += `
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-600/30 transition-colors">
+            <td class="p-3">
+              <strong class="block text-brand-600 dark:text-brand-400 font-mono">${b.id}</strong>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">${b.date}</span>
+            </td>
+            <td class="p-3 font-medium">${b.clientName || 'Consumidor Final'}</td>
+            <td class="p-3">
+              <span class="bg-slate-200 dark:bg-slate-600 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold mr-1 border border-slate-300 dark:border-slate-500">${b.dominio.toUpperCase() || 'S/D'}</span> 
+              ${b.model || 'Sin Especificar'}
+            </td>
+            <td class="p-3 text-[11px] truncate max-w-[150px]" title="${b.summaryTramite}">${b.summaryTramite}</td>
+            <td class="p-3 font-bold text-emerald-600 dark:text-emerald-400">${b.summaryTotal}</td>
+            <td class="p-3 text-center space-x-2">
+              <button onclick="loadBudget('${b.id}')" class="p-2 bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition" title="Cargar y Editar">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button onclick="deleteBudget('${b.id}')" class="p-2 bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 rounded-lg hover:bg-rose-200 dark:hover:bg-rose-800 transition" title="Eliminar Presupuesto">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table></div>`;
+      container.innerHTML = html;
+    }
+
+    function loadBudget(id) {
+      const b = budgetHistory.find(x => x.id === id);
+      if (!b) return;
+
+      activeBudgetId = b.id;
+      
+      document.getElementById('client-name').value = b.clientName || '';
+      document.getElementById('client-dni').value = b.clientDni || '';
+      document.getElementById('client-marital').value = b.marital || 'soltero';
+      document.getElementById('client-spouse').value = b.spouseName || '';
+      document.getElementById('client-spouse-dni').value = b.spouseDni || '';
+      document.getElementById('client-provincia').value = b.provincia || 'Corrientes';
+      document.getElementById('client-city').value = b.city || 'Corrientes Capital';
+      document.getElementById('client-seccional').value = b.seccional || 'Corrientes Nº 1';
+      
+      document.getElementById('vehicle-type').value = b.vType || 'auto';
+      document.getElementById('procedure-type').value = b.procType || 'transferencia';
+      document.getElementById('vehicle-dominio').value = b.dominio || '';
+      document.getElementById('vehicle-model').value = b.model || '';
+      document.getElementById('vehicle-origin').value = b.origin || 'nacional';
+      document.getElementById('vehicle-valuation').value = b.valuation || '0';
+      
+      document.getElementById('tax-dnrpa-rate').value = b.taxDnrpa || '1.5';
+      document.getElementById('tax-dgr-rate').value = b.taxDgr || '1.5';
+      document.getElementById('cost-forms-fixed').value = b.forms || '0';
+      document.getElementById('cost-f12-verif').value = b.f12 || '0';
+      document.getElementById('cost-acor-tax').value = b.acor || '0';
+      document.getElementById('cost-escribano').value = b.escribano || '0';
+      
+      document.getElementById('honorario-base').value = b.honBase || '0';
+      document.getElementById('honorario-complexity').value = b.honComp || '1.0';
+      document.getElementById('cost-discount').value = b.discount || '0';
+      document.getElementById('anticipo-type').value = b.anticipoType || 'gastos_plus_half_fee';
+
+      toggleSpouseFields();
+      
+      if (b.docStatus) {
+        currentDocStatus = b.docStatus;
+      }
+      initChecklist(b.procType); 
+
+      triggerFormUpdate();
+      switchView('creator');
+      showToast('Presupuesto cargado exitosamente', 'info');
+    }
+
+    function deleteBudget(id) {
+      if(confirm('¿Estás seguro de eliminar este presupuesto del historial de forma permanente?')) {
+        budgetHistory = budgetHistory.filter(b => b.id !== id);
+        localStorage.setItem('gestorAutoBudgets', JSON.stringify(budgetHistory));
+        renderHistoryTable();
+        showToast('Presupuesto eliminado', 'error');
+      }
+    }
+
+    // Inicializar todo al cargar
     initChecklist(document.getElementById('procedure-type').value);
     recalcAndRender();
   </script>
