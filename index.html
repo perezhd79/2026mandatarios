@@ -13,14 +13,6 @@
   <meta name="theme-color" content="#0f172a">
   <link rel="apple-touch-icon" href="https://placehold.co/192x192/0f2744/f59e0b?text=GA">
 
-  <!-- Manifest PWA embebido para Android y Chrome -->
-  <link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22GestorAuto%20Pro%22%2C%22short_name%22%3A%22GestorAuto%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f172a%22%2C%22theme_color%22%3A%22%230f172a%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fplacehold.co%2F192x192%2F0f2744%2Ff59e0b%3Ftext%3DGA%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
-
-  <!-- Google Fonts: Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome Icons CDN -->
@@ -30,57 +22,22 @@
 
   <script>
     tailwind.config = {
-      darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-            }
-          }
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+          colors: { brand: { 50: '#eff6ff', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' } }
         }
       }
     }
   </script>
   <style>
-    /* Printable document adjustments */
     @media print {
-      body * {
-        visibility: hidden;
-      }
-      #printable-budget, #printable-budget * {
-        visibility: visible;
-      }
-      #printable-budget {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 20px;
-        box-shadow: none;
-      }
-      .no-print {
-        display: none !important;
-      }
+      body * { visibility: hidden; }
+      #printable-budget, #printable-budget * { visibility: visible; }
+      #printable-budget { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 20px; box-shadow: none; }
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background-color: #cbd5e1;
-      border-radius: 9999px;
-    }
+    .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 9999px; }
   </style>
 </head>
 
@@ -103,26 +60,12 @@
           <p class="text-[11px] text-slate-400 hidden md:block truncate">Panel de Presupuestos DNRPA & DGR</p>
         </div>
       </div>
-
-      <!-- Navigation Tabs, Auto-Save Status & Config -->
       <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <div id="header-sync-pill" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-slate-800/90 border border-slate-700 text-xs text-slate-300">
-          <span id="sync-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span id="sync-status-text" class="text-[11px] font-medium text-emerald-300">Auto-guardado activo</span>
-        </div>
-
-        <button id="nav-btn-creator" onclick="switchView('creator')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-brand-600 text-white hover:bg-brand-500 transition shadow-sm flex items-center gap-1.5">
-          <i class="fa-solid fa-calculator text-xs sm:text-sm"></i>
-          <span class="hidden sm:inline">Nuevo Presupuesto</span>
-          <span class="sm:hidden">Nuevo</span>
+        <button onclick="switchView('creator')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-brand-600 text-white hover:bg-brand-500 transition shadow-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-calculator text-xs sm:text-sm"></i> <span class="hidden sm:inline">Nuevo Presupuesto</span>
         </button>
-        <button id="nav-btn-history" onclick="switchView('history')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center gap-1.5">
-          <i class="fa-solid fa-folder-open text-xs sm:text-sm"></i>
-          <span class="hidden sm:inline">Historial</span>
-          <span id="budget-count-badge" class="text-xs px-1.5 py-0.2 bg-emerald-600 text-white rounded-full font-bold">0</span>
-        </button>
-        <button onclick="openConfigModal()" title="Configuración de Mandatario" class="p-1.5 sm:p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition">
-          <i class="fa-solid fa-gear text-base sm:text-lg"></i>
+        <button onclick="switchView('history')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-folder-open text-xs sm:text-sm"></i> <span class="hidden sm:inline">Historial</span>
         </button>
       </div>
     </div>
@@ -130,9 +73,7 @@
 
   <main class="flex-1 max-w-7xl w-full mx-auto p-3 sm:p-6 lg:p-8 pb-24 lg:pb-8">
 
-    <!-- ==================== VIEW 1: PRESUPUESTADOR (CREATOR) ==================== -->
     <div id="view-creator" class="space-y-4 sm:space-y-5">
-
       <!-- Top Summary Metrics Bar -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4">
         <div class="bg-white p-3 sm:p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-2.5 sm:gap-3">
@@ -173,22 +114,7 @@
         </div>
       </div>
 
-      <!-- Barra de Presupuestos Recientes -->
-      <div class="bg-white p-3 sm:p-3.5 rounded-xl border border-slate-200 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-        <div class="flex items-center gap-2 min-w-0 overflow-hidden">
-          <span class="text-[11px] font-bold uppercase text-slate-500 shrink-0 flex items-center gap-1.5">
-            <i class="fa-solid fa-clock-rotate-left text-brand-600"></i> Recientes:
-          </span>
-          <div id="recent-budgets-chips" class="flex items-center gap-1.5 overflow-x-auto custom-scrollbar py-0.5 min-w-0 flex-1">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Form & Real-Time Output Grid -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-        <!-- Form Column (Left 7 cols) -->
         <div class="lg:col-span-7 space-y-6">
 
           <!-- Card 1: Cliente & Radicación -->
@@ -215,58 +141,18 @@
                 </div>
               </div>
               <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1">WhatsApp / Teléfono *</label>
-                <div class="relative">
-                  <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-500 font-bold"><i class="fa-brands fa-whatsapp"></i></span>
-                  <input type="tel" id="client-phone" placeholder="Ej: 3794123456" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
-                </div>
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-600 mb-1">Correo Electrónico</label>
-                <div class="relative">
-                  <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-envelope text-sm"></i></span>
-                  <input type="email" id="client-email" placeholder="cliente@correo.com" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
-                </div>
-              </div>
-              
-              <!-- NUEVO: Selector de Provincia y Localidad -->
-              <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">Provincia de Radicación *</label>
                 <select id="client-provincia" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white" onchange="triggerFormUpdate()">
                   <option value="Buenos Aires">Buenos Aires</option>
                   <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
-                  <option value="Catamarca">Catamarca</option>
-                  <option value="Chaco">Chaco</option>
-                  <option value="Chubut">Chubut</option>
                   <option value="Córdoba">Córdoba</option>
                   <option value="Corrientes" selected>Corrientes</option>
-                  <option value="Entre Ríos">Entre Ríos</option>
-                  <option value="Formosa">Formosa</option>
-                  <option value="Jujuy">Jujuy</option>
-                  <option value="La Pampa">La Pampa</option>
-                  <option value="La Rioja">La Rioja</option>
-                  <option value="Mendoza">Mendoza</option>
-                  <option value="Misiones">Misiones</option>
-                  <option value="Neuquén">Neuquén</option>
-                  <option value="Río Negro">Río Negro</option>
-                  <option value="Salta">Salta</option>
-                  <option value="San Juan">San Juan</option>
-                  <option value="San Luis">San Luis</option>
-                  <option value="Santa Cruz">Santa Cruz</option>
                   <option value="Santa Fe">Santa Fe</option>
-                  <option value="Santiago del Estero">Santiago del Estero</option>
-                  <option value="Tierra del Fuego">Tierra del Fuego</option>
-                  <option value="Tucumán">Tucumán</option>
                 </select>
               </div>
               <div>
                 <label class="block text-xs font-semibold text-slate-600 mb-1">Localidad / Municipio *</label>
                 <input type="text" id="client-city" placeholder="Ej: Capital, Goya, Resistencia..." value="Corrientes Capital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
-              </div>
-
-              <div class="sm:col-span-2">
-                <label class="block text-xs font-semibold text-slate-600 mb-1">Registro Seccional</label>
-                <input type="text" id="client-seccional" placeholder="Ej: Corrientes Nº 1 (Automotores)" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none transition" oninput="triggerFormUpdate()">
               </div>
             </div>
           </div>
@@ -280,8 +166,6 @@
               </div>
             </div>
             <div class="p-5 space-y-4">
-              
-              <!-- NUEVO: Categoría de Vehículo -->
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">Categoría del Vehículo *</label>
@@ -289,7 +173,6 @@
                     <option value="auto" selected>Automóvil / Pick-up / Utilitario</option>
                     <option value="moto">Motovehículo</option>
                     <option value="maquinaria">Maquinaria Agrícola / Vial</option>
-                    <option value="pesado">Camión / Transporte Pesado</option>
                   </select>
                 </div>
                 <div>
@@ -300,7 +183,7 @@
                       <option value="inscripcion_inicial">Inscripción Inicial (0 Km)</option>
                       <option value="cambio_radicacion">Cambio de Radicación Seccional</option>
                     </optgroup>
-                    <optgroup label="Gestión de Documentos (Cédulas y Chapas)">
+                    <optgroup label="Gestión de Documentos">
                       <option value="duplicado_cedula">Duplicado de Cédula (Verde/Azul) / Título</option>
                       <option value="cedula_autorizado">Expedición Cédula Autorizado a Conducir (Ex Azul)</option>
                       <option value="reposicion_placas">Reposición de Placas Metálicas (Patentes)</option>
@@ -320,7 +203,7 @@
                     <optgroup label="Motor, Chasis y Bajas">
                       <option value="alta_baja_motor">Alta / Baja de Motor o Chasis</option>
                       <option value="asignacion_rpa">Asignación de RPA (Motor / Chasis)</option>
-                      <option value="baja_unidad">Baja del Automotor (Robo/Hurto, Desarme, Exportación)</option>
+                      <option value="baja_unidad">Baja del Automotor (Robo, Desarme, Exportación)</option>
                     </optgroup>
                   </select>
                 </div>
@@ -339,18 +222,14 @@
 
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label class="block text-xs font-semibold text-slate-600 mb-1">Año / Modelo</label>
-                  <input type="number" id="vehicle-year" value="2021" min="1950" max="2028" class="w-full py-2 px-3 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none text-center font-semibold" oninput="triggerFormUpdate()">
-                </div>
-                <div>
                   <label class="block text-xs font-semibold text-slate-600 mb-1">Origen</label>
                   <select id="vehicle-origin" class="w-full py-2 px-3 text-sm rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-brand-500 outline-none" onchange="onOriginChange()">
                     <option value="nacional" selected>Nacional (1.5% DNRPA)</option>
                     <option value="importado">Importado (2.0% DNRPA)</option>
                   </select>
                 </div>
-                <div>
-                  <label class="block text-xs font-semibold text-slate-600 mb-1">Valuación DNRPA (\$) *</label>
+                <div class="sm:col-span-2">
+                  <label class="block text-xs font-semibold text-slate-600 mb-1">Valuación DNRPA ($) *</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 font-bold text-xs">$</span>
                     <input type="number" id="vehicle-valuation" value="0" step="10000" class="w-full pl-7 pr-3 py-2 text-sm rounded-lg border border-slate-300 focus:ring-2 focus:ring-brand-500 outline-none font-bold text-slate-900" oninput="triggerFormUpdate()">
@@ -365,13 +244,13 @@
             <div class="px-5 py-4 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <span class="w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">3</span>
-                <h3 class="font-semibold text-slate-800">Control de Documentación Recibida</h3>
+                <h3 class="font-semibold text-slate-800">Control de Documentación Requerida</h3>
               </div>
-              <span id="doc-progress-badge" class="text-xs font-semibold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">0 Entregados</span>
+              <span id="doc-progress-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">0 Entregados</span>
             </div>
             <div class="p-5">
               <div id="document-checklist-container" class="space-y-2.5 text-sm">
-                <!-- Dynamically injected checklist items -->
+                <!-- Dynamically injected checklist items via JS -->
               </div>
             </div>
           </div>
@@ -383,13 +262,8 @@
                 <span class="w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">4</span>
                 <h3 class="font-semibold text-slate-800">Liquidación y Costos</h3>
               </div>
-              <button onclick="resetTariffsToDefault()" type="button" class="text-xs text-brand-600 hover:text-brand-800 font-medium flex items-center gap-1">
-                <i class="fa-solid fa-rotate-left"></i> Restablecer valores
-              </button>
             </div>
             <div class="p-5 space-y-4">
-              
-              <!-- Tasas -->
               <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-3">
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
@@ -403,22 +277,21 @@
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Impuesto Sellos Provincial (%)</label>
                     <div class="flex items-center gap-2">
                       <input type="number" id="tax-dgr-rate" value="1.5" step="0.1" class="w-20 py-1.5 px-2 text-sm rounded border border-slate-300 text-center font-semibold" oninput="triggerFormUpdate()">
-                      <span class="text-xs text-slate-500">= <strong id="val-dgr-calculated" class="text-slate-800">\$0</strong></span>
+                      <span class="text-xs text-slate-500">= <strong id="val-dgr-calculated" class="text-slate-800">$0</strong></span>
                     </div>
                   </div>
                 </div>
-
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-200">
                   <div>
-                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Formularios Oficiales (\$)</label>
+                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Formularios Oficiales ($)</label>
                     <input type="number" id="cost-forms-fixed" value="38500" step="1000" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 text-slate-800 font-medium" oninput="triggerFormUpdate()">
                   </div>
                   <div>
-                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Certificaciones / Extras (\$)</label>
+                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Verificaciones / Extras ($)</label>
                     <input type="number" id="cost-f12-verif" value="26000" step="1000" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 text-slate-800 font-medium" oninput="triggerFormUpdate()">
                   </div>
                   <div>
-                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Tasas Municipales / Libre Deuda (\$)</label>
+                    <label class="block text-[11px] font-medium text-slate-600 mb-1">Tasas Municipales / ACOR ($)</label>
                     <input type="number" id="cost-acor-tax" value="9500" step="500" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 text-slate-800 font-medium" oninput="triggerFormUpdate()">
                   </div>
                 </div>
@@ -428,7 +301,7 @@
               <div class="bg-blue-50/60 p-4 rounded-xl border border-blue-100 space-y-3">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
-                    <label class="block text-xs font-semibold text-slate-600 mb-1">Honorario Base (\$)</label>
+                    <label class="block text-xs font-semibold text-slate-600 mb-1">Honorario Base ($)</label>
                     <input type="number" id="honorario-base" value="75000" step="5000" class="w-full py-1.5 px-2 text-sm rounded-lg border border-slate-300 font-bold text-slate-800 outline-none" oninput="triggerFormUpdate()">
                   </div>
                   <div>
@@ -440,64 +313,50 @@
                     </select>
                   </div>
                   <div>
-                    <label class="block text-[11px] font-bold text-rose-600 mb-1">Descuento / Bonificación (\$)</label>
+                    <label class="block text-[11px] font-bold text-rose-600 mb-1">Descuento / Bonificación ($)</label>
                     <input type="number" id="cost-discount" value="0" step="1000" class="w-full py-1.5 px-2 text-sm rounded-lg border border-rose-300 text-rose-700 font-bold bg-rose-50" oninput="triggerFormUpdate()">
                   </div>
                 </div>
 
                 <div class="pt-2 border-t border-blue-200/60 flex items-center justify-between text-xs">
-                  <span class="text-slate-600">Anticipo sugerido al cliente:</span>
+                  <span class="text-slate-600 font-medium">Anticipo sugerido al cliente:</span>
                   <div class="flex items-center gap-2">
                     <select id="anticipo-type" class="py-1 px-2 text-xs rounded border border-slate-300 bg-white" onchange="triggerFormUpdate()">
                       <option value="gastos">100% Gastos Oficiales</option>
                       <option value="50percent">50% del Total General</option>
                       <option value="gastos_plus_half_fee" selected>Gastos + 50% Honorarios</option>
                     </select>
-                    <strong id="val-anticipo" class="text-blue-900 font-bold text-sm">\$0</strong>
+                    <strong id="val-anticipo" class="text-blue-900 font-bold text-sm">$0</strong>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-
         </div>
 
-        <!-- Right Output & Actions Column (5 cols) -->
+        <!-- Right Output Column -->
         <div class="lg:col-span-5 space-y-4 sticky top-20">
-
-          <!-- Action Tool Bar -->
           <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
-            <button type="button" onclick="openDocExportModal('pdf')" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md">
-              <i class="fa-solid fa-sliders text-sm"></i>
-              <span>Configurar Documento & Descargar / Imprimir</span>
+            <button type="button" onclick="window.print()" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md">
+              <i class="fa-solid fa-print text-sm"></i>
+              <span>Imprimir / Descargar PDF</span>
             </button>
             <div class="grid grid-cols-2 gap-2">
-              <button type="button" onclick="manualSaveCurrentBudget()" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs flex items-center justify-center gap-2">
+              <button type="button" onclick="alert('Funcionalidad de guardado en memoria activa.')" class="w-full py-2.5 px-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-medium text-xs flex items-center justify-center gap-2">
                 <i class="fa-solid fa-floppy-disk"></i> Guardar
               </button>
               <button type="button" onclick="sendViaWhatsApp()" class="w-full py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2">
                 <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
               </button>
             </div>
-            <div class="flex items-center justify-between pt-2 border-t border-slate-100 text-xs">
-              <button onclick="createNewBudgetDraft()" class="text-brand-600 font-medium flex items-center gap-1">
-                <i class="fa-solid fa-plus-circle"></i> Nuevo en Blanco
-              </button>
-              <button onclick="copyFormattedText()" class="text-slate-500 hover:text-slate-800 flex items-center gap-1">
-                <i class="fa-solid fa-copy"></i> Copiar texto
-              </button>
-            </div>
           </div>
 
-          <!-- Live Printable Card Preview (What goes into PDF/Print) -->
+          <!-- Printable Preview -->
           <div class="bg-white rounded-2xl border border-slate-300 shadow-md p-6 text-slate-800" id="printable-budget">
-            
-            <div id="preview-header-box" class="border-b-2 border-slate-900 pb-4 flex justify-between items-start">
+            <div class="border-b-2 border-slate-900 pb-4 flex justify-between items-start">
               <div>
-                <h2 class="text-base font-extrabold text-slate-900 uppercase" id="preview-company-name">GESTORÍA AUTOMOTOR</h2>
-                <p class="text-[11px] text-slate-500 font-medium" id="preview-mandatario-info">Mandatario Nacional del Automotor</p>
-                <p class="text-[10px] text-slate-400">Contacto: <span id="preview-phone">...</span></p>
+                <h2 class="text-base font-extrabold text-slate-900 uppercase">GESTORÍA AUTOMOTOR</h2>
+                <p class="text-[11px] text-slate-500 font-medium">Mandatario Nacional del Automotor</p>
               </div>
               <div class="text-right">
                 <span class="text-xs uppercase font-mono font-bold text-slate-400">PRESUPUESTO</span>
@@ -506,129 +365,88 @@
               </div>
             </div>
 
-            <!-- Client & Vehicle Summary Box -->
             <div class="my-4 grid grid-cols-2 gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200 text-xs">
               <div>
                 <span class="text-[10px] text-slate-400 uppercase font-semibold block">Cliente</span>
                 <strong id="preview-client" class="text-slate-800 font-bold block truncate">...</strong>
-                <span id="preview-dni" class="text-slate-500 block text-[11px]">DNI: ...</span>
                 <span id="preview-loc" class="text-slate-500 block text-[11px]">Radicación: ...</span>
               </div>
               <div>
                 <span class="text-[10px] text-slate-400 uppercase font-semibold block">Automotor</span>
                 <strong id="preview-veh" class="text-slate-800 font-bold block truncate">...</strong>
                 <span class="font-mono font-bold text-slate-700 bg-white px-1.5 py-0.5 rounded border border-slate-300 inline-block text-[11px]" id="preview-patente">...</span>
-                <span class="text-slate-500 block text-[10px] mt-0.5" id="preview-val-str">Valuación: \$...</span>
+                <span class="text-slate-500 block text-[10px] mt-0.5" id="preview-val-str">Valuación: $...</span>
               </div>
             </div>
 
             <div class="mb-3 px-3 py-1.5 bg-blue-50 text-blue-900 rounded-md border border-blue-200 text-xs flex justify-between items-center">
               <span class="font-semibold" id="preview-tramite-name">Trámite...</span>
-              <span class="text-[10px] text-blue-700 uppercase font-bold" id="preview-origin-badge">...</span>
             </div>
 
-            <!-- Itemized Expenses Table -->
             <div class="space-y-1.5 text-xs">
-              <div id="row-prev-dnrpa" class="flex justify-between py-1 border-b border-slate-100">
+              <div class="flex justify-between py-1 border-b border-slate-100">
                 <span class="text-slate-600">Arancel Registro DNRPA (<span id="prev-dnrpa-rate">0</span>%):</span>
-                <span class="font-semibold text-slate-800" id="prev-dnrpa-amt">\$0</span>
+                <span class="font-semibold text-slate-800" id="prev-dnrpa-amt">$0</span>
               </div>
-              <div id="row-prev-dgr" class="flex justify-between py-1 border-b border-slate-100">
+              <div class="flex justify-between py-1 border-b border-slate-100">
                 <span class="text-slate-600">Impuesto a los Sellos Jurisdiccional (<span id="prev-dgr-rate">0</span>%):</span>
-                <span class="font-semibold text-slate-800" id="prev-dgr-amt">\$0</span>
+                <span class="font-semibold text-slate-800" id="prev-dgr-amt">$0</span>
               </div>
-              <div id="row-prev-forms" class="flex justify-between py-1 border-b border-slate-100">
-                <span class="text-slate-600">Formularios Oficiales y Aranceles Fijos:</span>
-                <span class="font-semibold text-slate-800" id="prev-forms-amt">\$0</span>
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-600">Formularios Oficiales y Fijos:</span>
+                <span class="font-semibold text-slate-800" id="prev-forms-amt">$0</span>
               </div>
-              <div id="row-prev-verif" class="flex justify-between py-1 border-b border-slate-100">
-                <span class="text-slate-600">Verificación Policial / Grabado / Certificaciones:</span>
-                <span class="font-semibold text-slate-800" id="prev-verif-amt">\$0</span>
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-600">Verificación / Certificaciones:</span>
+                <span class="font-semibold text-slate-800" id="prev-verif-amt">$0</span>
               </div>
-              <div id="row-prev-acor" class="flex justify-between py-1 border-b border-slate-100">
-                <span class="text-slate-600">Tasas Municipales / Infracciones (Estimado):</span>
-                <span class="font-semibold text-slate-800" id="prev-acor-amt">\$0</span>
+              <div class="flex justify-between py-1 border-b border-slate-100">
+                <span class="text-slate-600">Tasas Municipales / ACOR:</span>
+                <span class="font-semibold text-slate-800" id="prev-acor-amt">$0</span>
               </div>
-              
               <div id="row-prev-discount" class="hidden justify-between py-1 border-b border-slate-100 text-rose-600">
-                <span>Descuentos y Bonificaciones:</span>
-                <span class="font-semibold" id="prev-discount-amt">-\$0</span>
+                <span>Bonificaciones:</span>
+                <span class="font-semibold" id="prev-discount-amt">-$0</span>
               </div>
-
-              <div id="row-prev-subtotal" class="flex justify-between py-1.5 font-bold text-slate-900 bg-slate-50 px-2 rounded">
+              <div class="flex justify-between py-1.5 font-bold text-slate-900 bg-slate-50 px-2 rounded">
                 <span>Subtotal Gastos Registrales & Tasas:</span>
-                <span id="prev-subtotal-registral">\$0</span>
+                <span id="prev-subtotal-registral">$0</span>
               </div>
-              <div id="row-prev-honorarios" class="flex justify-between py-1.5 font-bold text-blue-800 bg-blue-50/80 px-2 rounded mt-1">
-                <span>Honorarios Profesionales de Gestoría:</span>
-                <span id="prev-honorarios-amt">\$0</span>
+              <div class="flex justify-between py-1.5 font-bold text-blue-800 bg-blue-50/80 px-2 rounded mt-1">
+                <span>Honorarios Profesionales:</span>
+                <span id="prev-honorarios-amt">$0</span>
               </div>
             </div>
 
-            <!-- Grand Total -->
             <div class="mt-4 p-3 rounded-xl bg-slate-900 text-white flex justify-between items-center">
               <div>
                 <span class="text-[10px] uppercase text-slate-400 block font-medium">TOTAL GENERAL</span>
-                <span class="text-xs text-amber-400 font-semibold" id="prev-anticipo-label">Anticipo inicio: \$0</span>
+                <span class="text-xs text-amber-400 font-semibold" id="prev-anticipo-label">Anticipo inicio: $0</span>
               </div>
               <div class="text-right">
-                <h3 class="text-xl font-extrabold text-white" id="prev-total-general">\$0</h3>
+                <h3 class="text-xl font-extrabold text-white" id="prev-total-general">$0</h3>
               </div>
             </div>
-
-            <p id="preview-legal-disclaimer" class="mt-4 text-[9px] text-slate-400 text-center leading-tight">
-              * Presupuesto orientativo válido por 10 días hábiles. Sujeto a variaciones de tabla DNRPA o modificaciones arancelarias del registro de radicación.
-            </p>
           </div>
-
         </div>
-
       </div>
-
     </div>
-
-    <!-- VISTA HISTORIAL OMITIDA POR BREVEDAD - USA LA MISMA LÓGICA QUE ANTES -->
+    
     <div id="view-history" class="space-y-6 hidden">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
             <h2 class="text-lg font-bold">Historial de Presupuestos</h2>
-            <p class="text-slate-500 text-sm">El historial está guardando los datos en la memoria del navegador. Para activarlo completamente debes integrar la base de datos.</p>
+            <p class="text-slate-500 text-sm">Vista disponible en construcción.</p>
         </div>
     </div>
-
   </main>
 
-  <!-- Modals -->
-  <div id="doc-export-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm hidden items-center justify-center p-3">
-    <!-- Configuración del Documento (Simplificado para el código base) -->
-    <div class="bg-white p-6 rounded-xl text-center max-w-sm w-full">
-        <h3 class="font-bold mb-2">Preparando Documento</h3>
-        <p class="text-sm mb-4 text-slate-600">Elige una opción para continuar</p>
-        <button onclick="executeDocumentExport('pdf')" class="w-full mb-2 py-2 bg-brand-600 text-white rounded font-bold">Descargar PDF</button>
-        <button onclick="executeDocumentExport('print')" class="w-full py-2 bg-slate-800 text-white rounded font-bold">Imprimir directo</button>
-        <button onclick="closeDocExportModal()" class="w-full mt-3 text-slate-400">Cancelar</button>
-    </div>
-  </div>
-
-  <div id="config-modal" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center p-3">
-      <!-- Mismos campos de config del mandatario -->
-  </div>
-
-  <script type="module">
-    // Configuracion Base 
-    const GESTOR_CONFIG = {
-      studioName: "GESTORÍA AUTOMOTOR",
-      gestorName: "Mandatario Nacional",
-      matricula: "Matr. DNRPA",
-      phone: "3794-000000",
-    };
-
-    let activeBudgetId = "PRE-" + Math.floor(Math.random() * 89999 + 10000);
-    let autoSaveTimer = null;
+  <script>
+    // Estado y variables globales
     let currentDocStatus = {};
+    let activeBudgetId = "PRE-" + Math.floor(Math.random() * 89999 + 10000);
 
-    // CATALOGO EXHAUSTIVO DNRPA Y REQUISITOS
+    // Diccionario completo de Trámites y Requisitos Documentales
     const PROCEDURE_DOCUMENTS = {
-      // Transferencia estándar
       transferencia: [
         { id: "doc_titulo", name: "Título de Propiedad Automotor", default: true },
         { id: "doc_cedula", name: "Cédula de Identificación (Verde/Azul)", default: true },
@@ -638,58 +456,118 @@
         { id: "doc_cuil", name: "Constancia CUIL / CUIT", default: true },
         { id: "doc_ceta", name: "Certificado CETA AFIP", default: false }
       ],
-      // Inscripción Inicial (0Km)
       inscripcion_inicial: [
         { id: "doc_factura", name: "Factura de Compra Concesionaria", default: true },
         { id: "doc_cert_fab", name: "Certificado de Fabricación / Aduana", default: true },
         { id: "doc_01", name: "Formulario 01", default: true },
-        { id: "doc_dni", name: "DNI Adquirente", default: true }
+        { id: "doc_dni", name: "DNI Adquirente", default: true },
+        { id: "doc_cuil", name: "Constancia CUIL / CUIT", default: true }
       ],
-      // Denuncia de venta
-      denuncia_venta: [
-        { id: "doc_boleto", name: "Boleto de Compraventa / Constancia", default: true },
-        { id: "doc_dni_titular", name: "DNI Titular Registral", default: true },
-        { id: "doc_f11", name: "Formulario 11", default: true }
+      cambio_radicacion: [
+        { id: "doc_titulo", name: "Título de Propiedad Automotor", default: true },
+        { id: "doc_cedula", name: "Cédulas emitidas", default: true },
+        { id: "doc_f04", name: "Formulario 04 (Cambio de Radicación)", default: true },
+        { id: "doc_dni", name: "DNI Titular (con nuevo domicilio)", default: true }
       ],
-      // Cédula Autorizado (Ex Azul)
+      duplicado_cedula: [
+        { id: "doc_titulo", name: "Título de Propiedad", default: true },
+        { id: "doc_f02", name: "Formulario 02", default: true },
+        { id: "doc_dni", name: "DNI Titular Registral", default: true },
+        { id: "doc_denuncia", name: "Denuncia de extravío / robo (si aplica)", default: false }
+      ],
       cedula_autorizado: [
         { id: "doc_dni_autorizado", name: "DNI de la persona autorizada", default: true },
         { id: "doc_dni_titular", name: "DNI Titular Registral", default: true },
         { id: "doc_f02", name: "Formulario 02 (Firmado por Titular)", default: true }
       ],
-      // Prendas
+      reposicion_placas: [
+        { id: "doc_titulo", name: "Título de Propiedad", default: true },
+        { id: "doc_cedula", name: "Cédula de Identificación", default: true },
+        { id: "doc_f02", name: "Formulario 02", default: true },
+        { id: "doc_placas", name: "Placas deterioradas (si es por deterioro)", default: false }
+      ],
+      denuncia_venta: [
+        { id: "doc_boleto", name: "Boleto de Compraventa / Constancia", default: true },
+        { id: "doc_dni_titular", name: "DNI Titular Registral", default: true },
+        { id: "doc_f11", name: "Formulario 11", default: true }
+      ],
+      denuncia_compra: [
+        { id: "doc_dni", name: "DNI del poseedor", default: true },
+        { id: "doc_f10", name: "Formulario 10 (Denuncia de Compra)", default: true },
+        { id: "doc_f12", name: "Verificación Policial F-12", default: true },
+        { id: "doc_constancias", name: "Recibos o prueba de posesión", default: true }
+      ],
+      informe_dominio: [
+        { id: "doc_dni", name: "DNI del solicitante", default: true },
+        { id: "doc_f02", name: "Formulario 02", default: true }
+      ],
+      certificado_ceta: [
+        { id: "doc_cuit", name: "Clave Fiscal AFIP / CUIT", default: true },
+        { id: "doc_datos_veh", name: "Datos del Automotor y Valuación", default: true }
+      ],
       inscripcion_prenda: [
         { id: "doc_contrato", name: "Contrato Prendario (3 ejemplares)", default: true },
         { id: "doc_f03", name: "Formulario 03 firmado", default: true },
         { id: "doc_titulo", name: "Título de Propiedad", default: true }
       ],
-      // Fallback genérico para otros trámites
+      cancelacion_prenda: [
+        { id: "doc_f03", name: "Formulario 03 (Cancelación)", default: true },
+        { id: "doc_contrato", name: "Contrato original sellado", default: true }
+      ],
+      anotacion_embargo: [
+        { id: "doc_oficio", name: "Oficio Judicial", default: true },
+        { id: "doc_f02", name: "Formulario 02", default: true }
+      ],
+      levantamiento_embargo: [
+        { id: "doc_oficio", name: "Oficio Judicial de Levantamiento", default: true },
+        { id: "doc_f02", name: "Formulario 02", default: true }
+      ],
+      alta_baja_motor: [
+        { id: "doc_titulo", name: "Título de Propiedad", default: true },
+        { id: "doc_cedula", name: "Cédula de Identificación", default: true },
+        { id: "doc_f04", name: "Formulario 04", default: true },
+        { id: "doc_factura", name: "Factura de compra del motor (si aplica)", default: false },
+        { id: "doc_f12", name: "Verificación Policial F-12", default: true }
+      ],
+      asignacion_rpa: [
+        { id: "doc_f12_observada", name: "Verificación Policial F-12 (Observada)", default: true },
+        { id: "doc_f02", name: "Formulario 02", default: true },
+        { id: "doc_fotos", name: "Fotografías del motor/chasis", default: true }
+      ],
+      baja_unidad: [
+        { id: "doc_titulo", name: "Título de Propiedad", default: true },
+        { id: "doc_cedulas", name: "Todas las Cédulas emitidas", default: true },
+        { id: "doc_placas", name: "Placas Metálicas (Patentes)", default: true },
+        { id: "doc_f04", name: "Formulario 04", default: true },
+        { id: "doc_denuncia", name: "Denuncia de Robo (si aplica)", default: false }
+      ],
       _generic: [
         { id: "doc_dni_titular", name: "DNI Solicitante / Titular", default: true },
-        { id: "doc_f02_f04", name: "Formulario 02 o 04 según corresponda", default: true },
+        { id: "doc_f02_f04", name: "Formulario Base (02 / 04 / 08)", default: true },
         { id: "doc_titulo", name: "Título de Propiedad o Constancia", default: true }
       ]
     };
 
+    // Función para renderizar e inyectar el HTML de los checklist
     function initChecklist(procedureKey) {
       const container = document.getElementById('document-checklist-container');
       container.innerHTML = '';
-      currentDocStatus = {};
+      currentDocStatus = {}; // Se limpia el estado únicamente al cambiar el trámite general
 
-      // Carga requisitos específicos, o si no existe, carga los genéricos
       const docs = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
 
       docs.forEach(item => {
+        // Se asume el estado por defecto del documento
         currentDocStatus[item.id] = item.default ? 'pendiente' : 'no_aplica';
 
         const row = document.createElement('div');
-        row.className = "flex flex-col sm:flex-row sm:items-center justify-between p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200 transition gap-2";
+        row.className = "flex flex-col sm:flex-row sm:items-center justify-between p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200 gap-3 transition-colors hover:bg-slate-100";
         row.innerHTML = `
-          <span class="text-xs font-medium text-slate-700 leading-snug">${item.name}</span>
+          <span class="text-xs font-semibold text-slate-700 leading-snug">${item.name}</span>
           <div class="flex items-center gap-1.5 shrink-0 w-full sm:w-auto">
-            <button type="button" onclick="setDocState('${item.id}', 'recibido')" id="btn-doc-${item.id}-recibido" class="py-1 px-2 text-[10px] font-semibold rounded ${currentDocStatus[item.id] === 'recibido' ? 'bg-emerald-600 text-white' : 'bg-white border text-slate-600'}">Recibido</button>
-            <button type="button" onclick="setDocState('${item.id}', 'pendiente')" id="btn-doc-${item.id}-pendiente" class="py-1 px-2 text-[10px] font-semibold rounded ${currentDocStatus[item.id] === 'pendiente' ? 'bg-amber-500 text-white' : 'bg-white border text-slate-600'}">Pendiente</button>
-            <button type="button" onclick="setDocState('${item.id}', 'no_aplica')" id="btn-doc-${item.id}-no_aplica" class="py-1 px-2 text-[10px] font-semibold rounded ${currentDocStatus[item.id] === 'no_aplica' ? 'bg-slate-600 text-white' : 'bg-white border text-slate-600'}">N/A</button>
+            <button type="button" onclick="setDocState('${item.id}', 'recibido')" id="btn-doc-${item.id}-recibido" class="py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition ${currentDocStatus[item.id] === 'recibido' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50'}">Recibido</button>
+            <button type="button" onclick="setDocState('${item.id}', 'pendiente')" id="btn-doc-${item.id}-pendiente" class="py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition ${currentDocStatus[item.id] === 'pendiente' ? 'bg-amber-500 text-white shadow-sm' : 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50'}">Pendiente</button>
+            <button type="button" onclick="setDocState('${item.id}', 'no_aplica')" id="btn-doc-${item.id}-no_aplica" class="py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition ${currentDocStatus[item.id] === 'no_aplica' ? 'bg-slate-600 text-white shadow-sm' : 'bg-white border border-slate-300 text-slate-600 hover:bg-slate-50'}">N/A</button>
           </div>
         `;
         container.appendChild(row);
@@ -697,11 +575,28 @@
       updateDocBadge();
     }
 
+    // Actualiza el CSS visual de un botón sin borrar ni recargar la lista
     function setDocState(docId, state) {
       currentDocStatus[docId] = state;
-      initChecklist(document.getElementById('procedure-type').value); // Re-render for quick hack
+      
+      const states = ['recibido', 'pendiente', 'no_aplica'];
+      states.forEach(s => {
+        const btn = document.getElementById(`btn-doc-${docId}-${s}`);
+        if (!btn) return;
+        
+        if (s === state) {
+          if (s === 'recibido') btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-emerald-600 text-white shadow-sm';
+          if (s === 'pendiente') btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-amber-500 text-white shadow-sm';
+          if (s === 'no_aplica') btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-slate-600 text-white shadow-sm';
+        } else {
+          btn.className = 'py-1.5 px-2.5 text-[10px] font-bold rounded-lg transition bg-white border border-slate-300 text-slate-600 hover:bg-slate-50';
+        }
+      });
+      
+      updateDocBadge();
     }
 
+    // Actualiza el contador de recibidos
     function updateDocBadge() {
       const keys = Object.keys(currentDocStatus);
       const total = keys.filter(k => currentDocStatus[k] !== 'no_aplica').length;
@@ -709,9 +604,101 @@
       document.getElementById('doc-progress-badge').textContent = `${recibidos} de ${total} Entregados`;
     }
 
+    // Cuando cambia el tipo de trámite
+    function onProcedureChange() {
+      const procedure = document.getElementById('procedure-type').value;
+      initChecklist(procedure);
+
+      // Reseteos condicionales rápidos
+      if (['informe_dominio', 'duplicado_cedula', 'cedula_autorizado', 'reposicion_placas', 'certificado_ceta'].includes(procedure)) {
+        document.getElementById('tax-dnrpa-rate').value = 0;
+        document.getElementById('tax-dgr-rate').value = 0;
+        document.getElementById('cost-f12-verif').value = 0;
+        document.getElementById('cost-acor-tax').value = 0;
+        document.getElementById('cost-forms-fixed').value = 20000;
+        document.getElementById('honorario-base').value = 35000;
+      } else {
+        const origin = document.getElementById('vehicle-origin').value;
+        document.getElementById('tax-dnrpa-rate').value = origin === 'importado' ? 2.0 : 1.5;
+        document.getElementById('tax-dgr-rate').value = 1.5;
+        onVehicleTypeChange(); 
+      }
+      triggerFormUpdate();
+    }
+
+    // Función general de recalculo
+    function recalcAndRender() {
+      const prov = document.getElementById('client-provincia').value;
+      const city = document.getElementById('client-city').value || "-";
+      
+      const vDom = document.getElementById('vehicle-dominio').value || "S/D";
+      const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
+      
+      const dnrpaRate = parseFloat(document.getElementById('tax-dnrpa-rate').value) || 0;
+      const dgrRate = parseFloat(document.getElementById('tax-dgr-rate').value) || 0;
+      
+      const forms = parseFloat(document.getElementById('cost-forms-fixed').value) || 0;
+      const f12 = parseFloat(document.getElementById('cost-f12-verif').value) || 0;
+      const acor = parseFloat(document.getElementById('cost-acor-tax').value) || 0;
+      const discount = parseFloat(document.getElementById('cost-discount').value) || 0;
+      
+      const honBase = parseFloat(document.getElementById('honorario-base').value) || 0;
+      const comp = parseFloat(document.getElementById('honorario-complexity').value) || 1.0;
+
+      const dnrpaAmt = Math.round(vVal * (dnrpaRate / 100));
+      const dgrAmt = Math.round(vVal * (dgrRate / 100));
+      const subRegistral = dnrpaAmt + dgrAmt + forms + f12 + acor;
+      const honTotal = Math.round(honBase * comp);
+      const totalGeneral = subRegistral + honTotal - discount;
+
+      document.getElementById('preview-budget-id').textContent = `#${activeBudgetId}`;
+      document.getElementById('preview-date').textContent = new Date().toLocaleDateString('es-AR');
+      document.getElementById('preview-client').textContent = document.getElementById('client-name').value || 'Consumidor Final';
+      document.getElementById('preview-loc').textContent = `Rad: ${city}, ${prov}`;
+      
+      document.getElementById('preview-veh').textContent = document.getElementById('vehicle-model').value || 'Vehículo sin especificar';
+      document.getElementById('preview-patente').textContent = vDom.toUpperCase();
+      document.getElementById('preview-val-str').textContent = `Valuación DNRPA: $${formatCurrency(vVal)}`;
+      
+      const selProc = document.getElementById('procedure-type');
+      document.getElementById('preview-tramite-name').textContent = selProc.options[selProc.selectedIndex].text;
+      
+      document.getElementById('prev-dnrpa-rate').textContent = dnrpaRate;
+      document.getElementById('prev-dgr-rate').textContent = dgrRate;
+      
+      document.getElementById('prev-dnrpa-amt').textContent = `$${formatCurrency(dnrpaAmt)}`;
+      document.getElementById('prev-dgr-amt').textContent = `$${formatCurrency(dgrAmt)}`;
+      document.getElementById('prev-forms-amt').textContent = `$${formatCurrency(forms)}`;
+      document.getElementById('prev-verif-amt').textContent = `$${formatCurrency(f12)}`;
+      document.getElementById('prev-acor-amt').textContent = `$${formatCurrency(acor)}`;
+      
+      document.getElementById('prev-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
+      document.getElementById('prev-honorarios-amt').textContent = `$${formatCurrency(honTotal)}`;
+      document.getElementById('prev-total-general').textContent = `$${formatCurrency(totalGeneral)}`;
+
+      if (discount > 0) {
+        document.getElementById('row-prev-discount').classList.remove('hidden');
+        document.getElementById('row-prev-discount').classList.add('flex');
+        document.getElementById('prev-discount-amt').textContent = `-$${formatCurrency(discount)}`;
+      } else {
+        document.getElementById('row-prev-discount').classList.add('hidden');
+      }
+
+      document.getElementById('val-dnrpa-calculated').textContent = `$${formatCurrency(dnrpaAmt)}`;
+      document.getElementById('val-dgr-calculated').textContent = `$${formatCurrency(dgrAmt)}`;
+      document.getElementById('kpi-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
+      document.getElementById('kpi-dgr-corrientes').textContent = `$${formatCurrency(dgrAmt)}`;
+      document.getElementById('kpi-honorarios').textContent = `$${formatCurrency(honTotal)}`;
+      document.getElementById('kpi-total-general').textContent = `$${formatCurrency(totalGeneral)}`;
+
+      const aType = document.getElementById('anticipo-type').value;
+      let anticipo = aType === 'gastos' ? subRegistral : (aType === '50percent' ? totalGeneral / 2 : subRegistral + (honTotal/2));
+      document.getElementById('val-anticipo').textContent = `$${formatCurrency(anticipo)}`;
+      document.getElementById('prev-anticipo-label').textContent = `Anticipo sugerido: $${formatCurrency(anticipo)}`;
+    }
+
     function onVehicleTypeChange() {
       const vType = document.getElementById('vehicle-type').value;
-      // Ajustes generales si es Moto o Maquinaria
       if (vType === 'moto') {
         document.getElementById('cost-forms-fixed').value = 18500;
         document.getElementById('cost-f12-verif').value = 12000;
@@ -728,27 +715,6 @@
       triggerFormUpdate();
     }
 
-    function onProcedureChange() {
-      const procedure = document.getElementById('procedure-type').value;
-      initChecklist(procedure);
-
-      // Lógica simplificada de reseteos según trámite
-      if (['informe_dominio', 'duplicado_cedula', 'cedula_autorizado', 'reposicion_placas', 'certificado_ceta'].includes(procedure)) {
-        document.getElementById('tax-dnrpa-rate').value = 0;
-        document.getElementById('tax-dgr-rate').value = 0;
-        document.getElementById('cost-f12-verif').value = 0;
-        document.getElementById('cost-acor-tax').value = 0;
-        document.getElementById('cost-forms-fixed').value = 20000;
-        document.getElementById('honorario-base').value = 35000;
-      } else {
-        const origin = document.getElementById('vehicle-origin').value;
-        document.getElementById('tax-dnrpa-rate').value = origin === 'importado' ? 2.0 : 1.5;
-        document.getElementById('tax-dgr-rate').value = 1.5;
-        onVehicleTypeChange(); // Vuelve a poner los valores base del vehículo seleccionado
-      }
-      triggerFormUpdate();
-    }
-
     function onOriginChange() {
       const origin = document.getElementById('vehicle-origin').value;
       const proc = document.getElementById('procedure-type').value;
@@ -758,101 +724,22 @@
       triggerFormUpdate();
     }
 
-    function resetTariffsToDefault() {
-      onVehicleTypeChange();
-      document.getElementById('tax-dnrpa-rate').value = 1.5;
-      document.getElementById('tax-dgr-rate').value = 1.5;
-      document.getElementById('cost-acor-tax').value = 9500;
-      document.getElementById('cost-discount').value = 0;
-      triggerFormUpdate();
+    function triggerFormUpdate() { recalcAndRender(); }
+    function formatCurrency(n) { return new Intl.NumberFormat('es-AR').format(n); }
+    function switchView(view) {
+        if(view === 'creator') {
+            document.getElementById('view-creator').classList.remove('hidden');
+            document.getElementById('view-history').classList.add('hidden');
+        } else {
+            document.getElementById('view-creator').classList.add('hidden');
+            document.getElementById('view-history').classList.remove('hidden');
+        }
     }
+    function sendViaWhatsApp() { alert("Simulando envío a WhatsApp"); }
 
-    function recalcAndRender() {
-      // Captura de datos
-      const prov = document.getElementById('client-provincia').value;
-      const city = document.getElementById('client-city').value || "-";
-      const seccional = document.getElementById('client-seccional').value || "-";
-      
-      const vDom = document.getElementById('vehicle-dominio').value || "S/D";
-      const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
-      
-      const dnrpaRate = parseFloat(document.getElementById('tax-dnrpa-rate').value) || 0;
-      const dgrRate = parseFloat(document.getElementById('tax-dgr-rate').value) || 0;
-      
-      const forms = parseFloat(document.getElementById('cost-forms-fixed').value) || 0;
-      const f12 = parseFloat(document.getElementById('cost-f12-verif').value) || 0;
-      const acor = parseFloat(document.getElementById('cost-acor-tax').value) || 0;
-      const discount = parseFloat(document.getElementById('cost-discount').value) || 0;
-      
-      const honBase = parseFloat(document.getElementById('honorario-base').value) || 0;
-      const comp = parseFloat(document.getElementById('honorario-complexity').value) || 1.0;
-
-      // Cálculos
-      const dnrpaAmt = Math.round(vVal * (dnrpaRate / 100));
-      const dgrAmt = Math.round(vVal * (dgrRate / 100));
-      const subRegistral = dnrpaAmt + dgrAmt + forms + f12 + acor;
-      const honTotal = Math.round(honBase * comp);
-      const totalGeneral = subRegistral + honTotal - discount;
-
-      // Actualizar vista previa PDF
-      document.getElementById('preview-budget-id').textContent = `#${activeBudgetId}`;
-      document.getElementById('preview-client').textContent = document.getElementById('client-name').value || 'Consumidor Final';
-      document.getElementById('preview-loc').textContent = `Rad: ${city}, ${prov}`;
-      
-      document.getElementById('preview-veh').textContent = document.getElementById('vehicle-model').value || 'Vehículo sin especificar';
-      document.getElementById('preview-patente').textContent = vDom.toUpperCase();
-      document.getElementById('preview-val-str').textContent = `Valuación DNRPA: $${formatCurrency(vVal)}`;
-      
-      document.getElementById('preview-tramite-name').textContent = document.getElementById('procedure-type').options[document.getElementById('procedure-type').selectedIndex].text;
-      
-      document.getElementById('prev-dnrpa-amt').textContent = `$${formatCurrency(dnrpaAmt)}`;
-      document.getElementById('prev-dgr-amt').textContent = `$${formatCurrency(dgrAmt)}`;
-      document.getElementById('prev-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
-      document.getElementById('prev-honorarios-amt').textContent = `$${formatCurrency(honTotal)}`;
-      document.getElementById('prev-total-general').textContent = `$${formatCurrency(totalGeneral)}`;
-
-      if (discount > 0) {
-        document.getElementById('row-prev-discount').classList.remove('hidden');
-        document.getElementById('row-prev-discount').classList.add('flex');
-        document.getElementById('prev-discount-amt').textContent = `-$${formatCurrency(discount)}`;
-      } else {
-        document.getElementById('row-prev-discount').classList.add('hidden');
-      }
-
-      // Actualizar KPIs de UI principal
-      document.getElementById('val-dnrpa-calculated').textContent = `$${formatCurrency(dnrpaAmt)}`;
-      document.getElementById('val-dgr-calculated').textContent = `$${formatCurrency(dgrAmt)}`;
-      document.getElementById('kpi-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
-      document.getElementById('kpi-dgr-corrientes').textContent = `$${formatCurrency(dgrAmt)}`;
-      document.getElementById('kpi-honorarios').textContent = `$${formatCurrency(honTotal)}`;
-      document.getElementById('kpi-total-general').textContent = `$${formatCurrency(totalGeneral)}`;
-
-      // Anticipo
-      const aType = document.getElementById('anticipo-type').value;
-      let anticipo = aType === 'gastos' ? subRegistral : (aType === '50percent' ? totalGeneral / 2 : subRegistral + (honTotal/2));
-      document.getElementById('val-anticipo').textContent = `$${formatCurrency(anticipo)}`;
-      document.getElementById('prev-anticipo-label').textContent = `Anticipo sugerido: $${formatCurrency(anticipo)}`;
-    }
-
-    function triggerFormUpdate() {
-      recalcAndRender();
-    }
-
-    function formatCurrency(number) {
-      return new Intl.NumberFormat('es-AR').format(number);
-    }
-
-    function openDocExportModal(action) {
-       document.getElementById('doc-export-modal').classList.remove('hidden');
-       document.getElementById('doc-export-modal').classList.add('flex');
-    }
-    
-    function closeDocExportModal() {
-       document.getElementById('doc-export-modal').classList.add('hidden');
-    }
-
-    function executeDocumentExport(targetAction) {
-      closeDocExportModal();
-      if (targetAction === 'print') {
-        window.print();
-      } else if
+    // Carga inicial automatizada al terminar de leer el script
+    initChecklist(document.getElementById('procedure-type').value);
+    recalcAndRender();
+  </script>
+</body>
+</html>
