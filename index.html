@@ -145,6 +145,7 @@
               </div>
             </div>
             <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Datos Titular -->
               <div>
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Nombre y Apellido *</label>
                 <div class="relative">
@@ -157,6 +158,13 @@
                 <div class="relative">
                   <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400"><i class="fa-solid fa-id-card text-sm"></i></span>
                   <input type="text" id="client-dni" placeholder="Ej: 20-33456789-2" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" oninput="triggerFormUpdate()">
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Teléfono / WhatsApp *</label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-emerald-500 font-bold"><i class="fa-brands fa-whatsapp"></i></span>
+                  <input type="tel" id="client-phone" placeholder="Ej: 3794123456" class="w-full pl-9 pr-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" oninput="triggerFormUpdate()">
                 </div>
               </div>
 
@@ -188,6 +196,7 @@
 
               <div class="pt-2 border-t border-slate-100 dark:border-slate-700 sm:col-span-2"></div>
 
+              <!-- Radicación -->
               <div>
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Provincia de Radicación *</label>
                 <select id="client-provincia" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" onchange="triggerFormUpdate()">
@@ -329,7 +338,7 @@
             </div>
           </div>
 
-          <!-- Card 3: Checklist Documental -->
+          <!-- Card 3: Checklist Documental Inteligente -->
           <div class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden transition-colors">
             <div class="px-5 py-4 bg-slate-50/80 dark:bg-slate-800/80 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
               <div class="flex items-center gap-2">
@@ -340,7 +349,7 @@
             </div>
             <div class="p-5">
               <div id="document-checklist-container" class="space-y-2.5 text-sm">
-                <!-- Dynamically injected -->
+                <!-- Dynamically injected via JS -->
               </div>
             </div>
           </div>
@@ -371,7 +380,6 @@
                     </div>
                   </div>
                 </div>
-                <!-- GRID AMPLIADA PARA INCLUIR ESCRIBANO -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2 border-t border-slate-200 dark:border-slate-600">
                   <div>
                     <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Formularios Oficiales ($)</label>
@@ -385,7 +393,6 @@
                     <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Municipal / ACOR ($)</label>
                     <input type="number" id="cost-acor-tax" value="9500" step="500" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-medium" oninput="triggerFormUpdate()">
                   </div>
-                  <!-- NUEVO: CAMPO ESCRIBANO -->
                   <div>
                     <label class="block text-[11px] font-medium text-slate-600 dark:text-slate-400 mb-1">Escribano / Certif. ($)</label>
                     <input type="number" id="cost-escribano" value="0" step="1000" class="w-full py-1.5 px-2 text-sm rounded border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-medium" oninput="triggerFormUpdate()" placeholder="Opcional">
@@ -510,7 +517,6 @@
                 <span class="font-semibold text-slate-800" id="prev-acor-amt">$0</span>
               </div>
               
-              <!-- NUEVO RENGLÓN ESCRIBANO PDF -->
               <div id="row-prev-escribano" class="hidden justify-between py-1 border-b border-slate-100">
                 <span class="text-slate-600">Escribano / Certificaciones Extra:</span>
                 <span class="font-semibold text-slate-800" id="prev-escribano-amt">$0</span>
@@ -842,6 +848,7 @@
     function onValuationChange() {
       const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
       const proc = document.getElementById('procedure-type').value;
+      
       if (['transferencia', 'inscripcion_inicial', 'inscripcion_prenda'].includes(proc)) {
         if (vVal > 15000000) {
           document.getElementById('tax-dgr-rate').value = 2.0;
@@ -879,7 +886,6 @@
       const dnrpaAmt = Math.round(vVal * (dnrpaRate / 100));
       const dgrAmt = Math.round(vVal * (dgrRate / 100));
       
-      // Sumamos el escribano al subtotal de gastos
       const subRegistral = dnrpaAmt + dgrAmt + forms + f12 + acor + escribano;
       const honTotal = Math.round(honBase * comp);
       const totalGeneral = subRegistral + honTotal - discount;
@@ -926,7 +932,6 @@
       document.getElementById('prev-verif-amt').textContent = `$${formatCurrency(f12)}`;
       document.getElementById('prev-acor-amt').textContent = `$${formatCurrency(acor)}`;
       
-      // Control PDF Escribano
       if (escribano > 0) {
         document.getElementById('row-prev-escribano').classList.remove('hidden');
         document.getElementById('row-prev-escribano').classList.add('flex');
@@ -1034,11 +1039,83 @@
         }
     }
     
+    // FORMATO DE WHATSAPP MEJORADO
     function sendViaWhatsApp() { 
-      const tel = document.getElementById('client-phone')?.value?.replace(/\D/g,'') || '';
-      const total = document.getElementById('prev-total-general').innerText;
-      const texto = `Hola, adjunto el detalle del presupuesto automotor. Total estimado: ${total}`;
-      window.open(`https://wa.me/549${tel}?text=${encodeURIComponent(texto)}`, '_blank'); 
+      let tel = document.getElementById('client-phone')?.value?.replace(/\D/g,'') || '';
+      if (!tel || tel.length < 8) {
+        showToast("Por favor ingresa un número de teléfono válido.", "error");
+        return;
+      }
+      if (tel.length === 10) {
+        tel = '549' + tel;
+      }
+
+      const clientName = document.getElementById('client-name').value || 'Cliente';
+      const procedureSelect = document.getElementById('procedure-type');
+      const procedureText = procedureSelect.options[procedureSelect.selectedIndex].text;
+      const procedureKey = procedureSelect.value;
+      const vehicleModel = document.getElementById('vehicle-model').value || 'Vehículo';
+      const vehicleDominio = document.getElementById('vehicle-dominio').value.toUpperCase() || 'S/D';
+
+      const dnrpaAmt = document.getElementById('prev-dnrpa-amt').innerText;
+      const dgrAmt = document.getElementById('prev-dgr-amt').innerText;
+      const formsAmt = document.getElementById('prev-forms-amt').innerText;
+      const verifAmt = document.getElementById('prev-verif-amt').innerText;
+      const acorAmt = document.getElementById('prev-acor-amt').innerText;
+      
+      const escribanoVal = parseFloat(document.getElementById('cost-escribano').value) || 0;
+      const escribanoAmt = document.getElementById('prev-escribano-amt').innerText;
+      const escribanoText = escribanoVal > 0 ? `▪️ Escribano / Certif: ${escribanoAmt}\n` : '';
+      
+      const honorariosAmt = document.getElementById('prev-honorarios-amt').innerText;
+      const totalGeneral = document.getElementById('prev-total-general').innerText;
+      const anticipo = document.getElementById('val-anticipo').innerText;
+
+      let pendingDocs = [];
+      const baseDocs = PROCEDURE_DOCUMENTS[procedureKey] || PROCEDURE_DOCUMENTS._generic;
+      let docsToCheck = JSON.parse(JSON.stringify(baseDocs));
+      
+      const marital = document.getElementById('client-marital')?.value || 'soltero';
+      const tramitesConAsentimiento = ['transferencia', 'inscripcion_prenda', 'baja_unidad'];
+      if (marital === 'casado' && tramitesConAsentimiento.includes(procedureKey)) {
+        docsToCheck.splice(2, 0, { id: "doc_asentimiento", name: "Firma Cónyuge (Asentimiento) y Fotocopia DNI" });
+      }
+
+      docsToCheck.forEach(doc => {
+        if (currentDocStatus[doc.id] === 'pendiente') {
+          pendingDocs.push(doc.name);
+        }
+      });
+
+      let docsText = '';
+      if (pendingDocs.length > 0) {
+        docsText = `*📄 DOCUMENTACIÓN PENDIENTE A TRAER:*\n` + pendingDocs.map(d => `▪️ ${d}`).join('\n');
+      } else {
+        docsText = `*✅ DOCUMENTACIÓN:* Toda la documentación requerida para iniciar ya se encuentra entregada.`;
+      }
+
+      const texto = `*PRESUPUESTO GESTORÍA AUTOMOTOR* 🚗\n` +
+      `Hola *${clientName}*, te comparto el detalle estimado de tu trámite:\n\n` +
+      `*Trámite:* ${procedureText}\n` +
+      `*Vehículo:* ${vehicleModel} - Patente: *${vehicleDominio}*\n\n` +
+      `*💰 DESGLOSE DE COSTOS:*\n` +
+      `▪️ Arancel DNRPA: ${dnrpaAmt}\n` +
+      `▪️ Impuesto Sellos (DGR): ${dgrAmt}\n` +
+      `▪️ Formularios: ${formsAmt}\n` +
+      `▪️ Verificación/Extras: ${verifAmt}\n` +
+      `▪️ Tasas Mun./ACOR: ${acorAmt}\n` +
+      escribanoText +
+      `------------------------\n` +
+      `▪️ *Honorarios Profesionales:* ${honorariosAmt}\n` +
+      `------------------------\n` +
+      `*TOTAL GENERAL ESTIMADO:* ${totalGeneral}\n` +
+      `*Anticipo Sugerido:* ${anticipo}\n\n` +
+      docsText + `\n\n` +
+      `_Válido por 10 días. Sujeto a actualización de tabla DNRPA._\n` +
+      `Cualquier consulta, estoy a tu disposición.`;
+
+      window.open(`https://wa.me/${tel}?text=${encodeURIComponent(texto)}`, '_blank'); 
+      showToast('Abriendo WhatsApp con presupuesto detallado...', 'success');
     }
 
     // 6. Base de Datos (LocalStorage)
