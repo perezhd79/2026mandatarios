@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestoría Automotor - Sistema Inteligente de Presupuestos</title>
-  
+
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -43,10 +43,10 @@
         padding: 0 !important;
       }
       body * { visibility: hidden !important; }
-      #printable-budget, #printable-budget * { 
-        visibility: visible !important; 
+      #printable-budget, #printable-budget * {
+        visibility: visible !important;
       }
-      #printable-budget { 
+      #printable-budget {
         position: fixed !important;
         left: 0 !important;
         top: 0 !important;
@@ -99,10 +99,10 @@
         </div>
       </div>
       <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-        <button onclick="createNewBudget()" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-brand-600 text-white hover:bg-brand-500 transition shadow-sm flex items-center gap-1.5">
+        <button onclick="createNewBudget()" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-brand-600 text-white hover:bg-brand-500 transition shadow-sm flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-calculator text-xs sm:text-sm"></i> <span class="hidden sm:inline">Nuevo</span>
         </button>
-        <button onclick="switchView('history')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center gap-1.5">
+        <button onclick="switchView('history')" class="px-2.5 sm:px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 transition flex items-center gap-1.5 cursor-pointer">
           <i class="fa-solid fa-folder-open text-xs sm:text-sm"></i> <span class="hidden sm:inline">Historial</span>
         </button>
       </div>
@@ -157,15 +157,15 @@
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div class="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 flex-1">
             <label for="mandatario-select" class="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 shrink-0 flex items-center gap-1.5">
-              <i class="fa-solid fa-user-check text-amber-500"></i> Mandatario Activo:
+              <i class="fa-solid fa-user-check text-amber-500"></i> Mandatario que Elabora:
             </label>
             <select id="mandatario-select" class="w-full sm:max-w-md px-3 py-2 text-sm font-semibold rounded-lg border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-700 text-slate-900 dark:text-white focus:ring-2 focus:ring-brand-500 outline-none" onchange="onMandatarioChange()">
               <!-- Se completa por JS -->
             </select>
           </div>
           <div class="flex items-center gap-2 shrink-0">
-            <button type="button" onclick="toggleMandatarioPanel()" class="px-3 py-2 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-600 text-slate-950 transition flex items-center gap-1.5 shadow-sm">
-              <i class="fa-solid fa-user-plus"></i> Gestionar Mandatarios
+            <button type="button" onclick="toggleMandatarioPanel()" class="px-3 py-2 rounded-lg text-xs font-bold bg-amber-500 hover:bg-amber-600 text-slate-950 transition flex items-center gap-1.5 shadow-sm cursor-pointer">
+              <i class="fa-solid fa-user-plus"></i> Cargar / Gestionar Mandatarios
             </button>
           </div>
         </div>
@@ -186,20 +186,20 @@
               <input type="text" id="mandatario-phone" placeholder="Ej: 3794-000000" class="w-full px-3 py-1.5 text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-brand-500">
             </div>
             <div>
-              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Estudio / Leyenda</label>
+              <label class="block text-[11px] font-bold text-slate-600 dark:text-slate-300 mb-1">Estudio / Encabezado</label>
               <input type="text" id="mandatario-studio" placeholder="Ej: Estudio Integral Automotor" class="w-full px-3 py-1.5 text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white outline-none focus:ring-2 focus:ring-brand-500">
             </div>
           </div>
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2">
-              <button type="button" onclick="saveMandatario()" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1.5">
+              <button type="button" onclick="saveMandatario()" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition flex items-center gap-1.5 cursor-pointer">
                 <i class="fa-solid fa-check"></i> Guardar Mandatario
               </button>
-              <button type="button" onclick="clearMandatarioForm()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition">
-                Limpiar Campos
+              <button type="button" onclick="clearMandatarioForm()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-600 transition cursor-pointer">
+                Nuevo / Limpiar
               </button>
             </div>
-            <button type="button" onclick="deleteSelectedMandatario()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-800 transition flex items-center gap-1.5">
+            <button type="button" onclick="deleteSelectedMandatario()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300 hover:bg-rose-200 dark:hover:bg-rose-800 transition flex items-center gap-1.5 cursor-pointer">
               <i class="fa-solid fa-trash"></i> Quitar Seleccionado
             </button>
           </div>
@@ -241,7 +241,7 @@
               </div>
 
               <div class="pt-2 border-t border-slate-100 dark:border-slate-700 sm:col-span-2"></div>
-              
+
               <div class="sm:col-span-2">
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Estado Civil *</label>
                 <select id="client-marital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" onchange="toggleSpouseFields(); initChecklist(document.getElementById('procedure-type').value); triggerFormUpdate();">
@@ -282,7 +282,7 @@
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Localidad / Municipio *</label>
                 <input type="text" id="client-city" placeholder="Ej: Capital, Goya..." value="Corrientes Capital" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" oninput="triggerFormUpdate()">
               </div>
-              
+
               <div class="sm:col-span-2">
                 <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Registro Seccional de Radicación *</label>
                 <select id="client-seccional" class="w-full px-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 focus:ring-2 focus:ring-brand-500 outline-none transition bg-white dark:bg-slate-700 dark:text-white" onchange="triggerFormUpdate()">
@@ -399,7 +399,7 @@
                   </select>
                 </div>
                 <div class="sm:col-span-2">
-                  <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Precio / Valuación del Automotor (\$) *</label>
+                  <label class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Valor en Tabla / Valuación ($) *</label>
                   <div class="relative">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 font-bold text-xs">$</span>
                     <input type="number" id="vehicle-valuation" value="0" step="10000" class="w-full pl-7 pr-3 py-2 text-sm rounded-lg border-2 border-brand-400 dark:border-brand-600 focus:ring-2 focus:ring-brand-500 outline-none transition font-bold text-slate-900 dark:text-white bg-white dark:bg-slate-700" oninput="recalculateAutomaticRates()">
@@ -416,11 +416,11 @@
                 <span class="w-6 h-6 rounded-full bg-brand-600 text-white text-xs flex items-center justify-center font-bold">3</span>
                 <h3 class="font-semibold text-slate-800 dark:text-white">Control de Documentación Requerida</h3>
               </div>
-              <span id="doc-progress-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">0 Entregados</span>
+              <span id="doc-progress-badge" class="text-xs font-semibold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300">0 de 0 Entregados</span>
             </div>
             <div class="p-5">
               <div id="document-checklist-container" class="space-y-2.5 text-sm">
-                <!-- Dynamically injected via JS -->
+                <!-- Inyectado dinámicamente por JS -->
               </div>
             </div>
           </div>
@@ -440,7 +440,7 @@
               <!-- Bloque Automático: Registro y Rentas -->
               <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-xl border border-slate-200 dark:border-slate-600 space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Cálculo Automático sobre Valuación</span>
+                  <span class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Cálculo Automático sobre Valor en Tabla</span>
                   <span class="text-[11px] text-slate-400"><i class="fa-solid fa-lock mr-1"></i>Automático</span>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -471,14 +471,14 @@
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Formularios Oficiales (\$) *</label>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Formularios Oficiales ($) *</label>
                     <div class="relative">
                       <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 font-bold text-xs">$</span>
                       <input type="number" id="cost-forms-fixed" value="38500" step="1000" class="w-full pl-7 pr-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-bold focus:ring-2 focus:ring-brand-500 outline-none" oninput="triggerFormUpdate()">
                     </div>
                   </div>
                   <div>
-                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Honorarios Profesionales (\$) *</label>
+                    <label class="block text-xs font-bold text-slate-700 dark:text-slate-200 mb-1">Honorarios Profesionales ($) *</label>
                     <div class="relative">
                       <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 font-bold text-xs">$</span>
                       <input type="number" id="honorario-base" value="75000" step="5000" class="w-full pl-7 pr-3 py-2 text-sm rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 dark:text-white font-bold focus:ring-2 focus:ring-brand-500 outline-none" oninput="triggerFormUpdate()">
@@ -506,20 +506,20 @@
         <div class="lg:col-span-5 space-y-4 sticky top-20">
           <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-2.5 transition-colors">
             <div class="grid grid-cols-2 gap-2">
-              <button type="button" onclick="executeDocumentExport('pdf')" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-transform active:scale-95">
+              <button type="button" onclick="executeDocumentExport('pdf')" class="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-transform active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-file-pdf text-sm"></i>
                 <span>Descargar PDF (1 Pág)</span>
               </button>
-              <button type="button" onclick="executeDocumentExport('print')" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95">
+              <button type="button" onclick="executeDocumentExport('print')" class="w-full py-2.5 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-print text-sm"></i>
                 <span>Imprimir</span>
               </button>
             </div>
             <div class="grid grid-cols-2 gap-2">
-              <button type="button" onclick="manualSaveCurrentBudget()" class="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-semibold text-xs flex items-center justify-center gap-2 transition-transform active:scale-95">
+              <button type="button" onclick="manualSaveCurrentBudget()" class="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 text-slate-800 dark:text-white font-semibold text-xs flex items-center justify-center gap-2 transition-transform active:scale-95 cursor-pointer">
                 <i class="fa-solid fa-floppy-disk"></i> Guardar Historial
               </button>
-              <button type="button" onclick="sendViaWhatsApp()" class="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-transform active:scale-95">
+              <button type="button" onclick="sendViaWhatsApp()" class="w-full py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-transform active:scale-95 cursor-pointer">
                 <i class="fa-brands fa-whatsapp text-sm"></i> Enviar WhatsApp
               </button>
             </div>
@@ -535,8 +535,8 @@
                 </div>
                 <div>
                   <h2 class="text-sm font-black text-slate-900 tracking-wide uppercase leading-tight" id="preview-studio-title">GESTORÍA INTEGRAL DEL AUTOMOTOR</h2>
-                  <p class="text-[10px] text-slate-600 font-semibold" id="preview-mandatario-header">Mandatario Nacional Matriculado • DNRPA</p>
-                  <p class="text-[9.5px] text-slate-400 font-medium" id="preview-mandatario-contact"></p>
+                  <p class="text-[10px] text-slate-700 font-bold" id="preview-mandatario-header">Mandatario Nacional Matriculado • DNRPA</p>
+                  <p class="text-[9.5px] text-slate-500 font-medium" id="preview-mandatario-contact"></p>
                 </div>
               </div>
               <div class="text-right shrink-0">
@@ -563,7 +563,7 @@
                 </div>
               </div>
             </div>
-            
+
             <!-- Asentimiento Conyugal (Solo si aplica) -->
             <div id="preview-spouse-section" class="hidden mb-2.5 px-2.5 py-1.5 rounded-md border border-amber-200 bg-amber-50/50 text-[10px] flex justify-between items-center">
               <div>
@@ -657,22 +657,39 @@
         </div>
       </div>
     </div>
-    
+
     <!-- VISTA DEL HISTORIAL -->
     <div id="view-history" class="space-y-6 hidden">
-        <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-            <div class="flex justify-between items-center mb-4">
-              <h2 class="text-lg font-bold text-slate-900 dark:text-white">Base de Datos - Presupuestos Guardados</h2>
-            </div>
-            <div id="history-table-container">
-              <!-- Renderizado por JS -->
-            </div>
+      <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-lg font-bold text-slate-900 dark:text-white">Base de Datos - Presupuestos Guardados</h2>
         </div>
+        <div id="history-table-container">
+          <!-- Renderizado por JS -->
+        </div>
+      </div>
     </div>
   </main>
 
   <script>
-    // 1. Funcionalidades UI (Toasts y Loaders)
+    // 1. Configuración Centralizada de Alícuotas (Registro DNRPA y Rentas DGR)
+    const TAX_RATES_CONFIG = {
+      tramitesConValuacion: ['transferencia', 'inscripcion_inicial', 'inscripcion_prenda'],
+      dnrpa: {
+        auto: { nacional: 1.5, importado: 2.0 },
+        moto: { nacional: 1.5, importado: 2.0 },
+        maquinaria: { nacional: 1.0, importado: 1.5 }
+      },
+      dgrPorProvincia: {
+        'Corrientes': 1.5,
+        'Buenos Aires': 3.0,
+        'CABA': 3.0,
+        'Córdoba': 1.5,
+        'Santa Fe': 2.0
+      }
+    };
+
+    // 2. Funcionalidades UI (Toasts, Scroll y PDF)
     window.addEventListener('scroll', () => {
       const btn = document.getElementById('btn-back-to-top');
       if (window.scrollY > 300) {
@@ -687,11 +704,11 @@
     function showToast(message, type = 'info') {
       const container = document.getElementById('toast-container');
       const toast = document.createElement('div');
-      let bgClass = type === 'success' ? 'bg-emerald-600' : (type === 'error' ? 'bg-rose-600' : 'bg-brand-600');
-      
+      const bgClass = type === 'success' ? 'bg-emerald-600' : (type === 'error' ? 'bg-rose-600' : 'bg-brand-600');
+
       toast.className = `${bgClass} text-white px-4 py-3 rounded-xl shadow-lg flex items-center gap-3 text-xs font-medium transition-all duration-300 transform translate-y-2 opacity-0`;
       toast.innerHTML = `<i class="fa-solid fa-circle-info text-lg"></i><span>${message}</span>`;
-      
+
       container.appendChild(toast);
       setTimeout(() => toast.classList.remove('translate-y-2', 'opacity-0'), 10);
       setTimeout(() => {
@@ -701,10 +718,12 @@
     }
 
     function executeDocumentExport(targetAction) {
+      recalcAndRender();
+
       const loader = document.getElementById('loader-overlay');
       loader.classList.remove('hidden');
       setTimeout(() => loader.classList.remove('opacity-0'), 10);
-      
+
       setTimeout(() => {
         if (targetAction === 'print') {
           loader.classList.add('opacity-0');
@@ -716,7 +735,6 @@
         if (targetAction === 'pdf') {
           const sourceEl = document.getElementById('printable-budget');
 
-          // Crear contenedor aislado en modo claro con ancho fijo A4 para evitar recortes o saltos de página
           const exportHost = document.createElement('div');
           exportHost.style.position = 'fixed';
           exportHost.style.left = '-10000px';
@@ -767,13 +785,13 @@
               exportHost.remove();
               loader.classList.add('opacity-0');
               setTimeout(() => loader.classList.add('hidden'), 300);
-              showToast('No se pudo generar el PDF automáticamente', 'error');
+              showToast('Error al generar el PDF', 'error');
             });
         }
-      }, 300);
+      }, 250);
     }
 
-    // 2. Variables Globales y Mandatarios
+    // 3. Variables Globales y Mandatarios
     let currentDocStatus = {};
     let activeBudgetId = "PRE-" + Math.floor(Math.random() * 89999 + 10000);
     let budgetHistory = JSON.parse(localStorage.getItem('gestorAutoBudgets')) || [];
@@ -792,7 +810,7 @@
     let activeMandatarioId = localStorage.getItem('gestorAutoActiveMandatarioId') || (mandatariosList[0]?.id || '');
 
     function initMandatarios() {
-      if (!mandatariosList.length) {
+      if (!Array.isArray(mandatariosList) || !mandatariosList.length) {
         mandatariosList = [...DEFAULT_MANDATARIOS];
       }
       if (!mandatariosList.some(m => m.id === activeMandatarioId)) {
@@ -821,7 +839,7 @@
       activeMandatarioId = document.getElementById('mandatario-select').value;
       localStorage.setItem('gestorAutoActiveMandatarioId', activeMandatarioId);
       applyActiveMandatarioToPreview();
-      showToast(`Mandatario seleccionado: ${getActiveMandatario().name}`, 'info');
+      showToast(`Mandatario activo: ${getActiveMandatario().name}`, 'info');
     }
 
     function toggleMandatarioPanel() {
@@ -843,8 +861,7 @@
       document.getElementById('mandatario-name').value = '';
       document.getElementById('mandatario-matricula').value = '';
       document.getElementById('mandatario-phone').value = '';
-      document.getElementById('mandatario-studio').value = '';
-      document.getElementById('mandatario-name').dataset.editingId = '';
+      document.getElementById('mandatario-studio').value = 'GESTORÍA INTEGRAL DEL AUTOMOTOR';
       document.getElementById('mandatario-name').focus();
     }
 
@@ -855,7 +872,7 @@
       const studio = document.getElementById('mandatario-studio').value.trim() || 'GESTORÍA INTEGRAL DEL AUTOMOTOR';
 
       if (!name || !matricula) {
-        showToast('Completa al menos nombre y matrícula del mandatario.', 'error');
+        showToast('Ingresa el nombre y la matrícula del mandatario.', 'error');
         return;
       }
 
@@ -875,12 +892,12 @@
       localStorage.setItem('gestorAutoMandatarios', JSON.stringify(mandatariosList));
       localStorage.setItem('gestorAutoActiveMandatarioId', activeMandatarioId);
       initMandatarios();
-      showToast('Mandatario guardado y seleccionado', 'success');
+      showToast('Mandatario guardado y asignado al presupuesto', 'success');
     }
 
     function deleteSelectedMandatario() {
       if (mandatariosList.length <= 1) {
-        showToast('Debe existir al menos un mandatario en el sistema.', 'error');
+        showToast('Debe quedar al menos un mandatario registrado.', 'error');
         return;
       }
       mandatariosList = mandatariosList.filter(m => m.id !== activeMandatarioId);
@@ -894,13 +911,13 @@
     function applyActiveMandatarioToPreview() {
       const m = getActiveMandatario();
       document.getElementById('preview-studio-title').textContent = m.studio || 'GESTORÍA INTEGRAL DEL AUTOMOTOR';
-      document.getElementById('preview-mandatario-header').textContent = `${m.name} • ${m.matricula}`;
-      document.getElementById('preview-mandatario-contact').textContent = m.phone ? `Tel: ${m.phone}` : '';
+      document.getElementById('preview-mandatario-header').textContent = `Elaborado por: ${m.name} • ${m.matricula}`;
+      document.getElementById('preview-mandatario-contact').textContent = m.phone ? `Contacto: ${m.phone}` : '';
       document.getElementById('prev-mandatario-sig-name').textContent = m.name || 'Mandatario Interviniente';
       document.getElementById('prev-mandatario-sig-mat').textContent = m.matricula || 'Firma y Sello Profesional';
     }
 
-    // 3. Diccionario Base de Documentación por Trámite
+    // 4. Diccionario Ampliado de Documentación Requerida por Trámite
     const PROCEDURE_DOCUMENTS = {
       transferencia: [
         { id: "doc_titulo", name: "Título de Propiedad Automotor", default: true },
@@ -908,11 +925,12 @@
         { id: "doc_08", name: "Formulario 08 (Firmado y Certificado)", default: true },
         { id: "doc_f12", name: "Verificación Policial F-12", default: true },
         { id: "doc_dni", name: "DNI Comprador y Vendedor", default: true },
-        { id: "doc_cuil", name: "Constancia CUIL / CUIT", default: true }
+        { id: "doc_cuil", name: "Constancia CUIL / CUIT Comprador y Vendedor", default: true },
+        { id: "doc_libre_deuda", name: "Libre Deuda de Patentes y Multas / Infracciones", default: true }
       ],
       inscripcion_inicial: [
         { id: "doc_factura", name: "Factura de Compra Concesionaria", default: true },
-        { id: "doc_cert_fab", name: "Certificado de Fabricación / Aduana", default: true },
+        { id: "doc_cert_fab", name: "Certificado de Fabricación / Importación (Aduana)", default: true },
         { id: "doc_01", name: "Formulario 01", default: true },
         { id: "doc_dni", name: "DNI Adquirente", default: true },
         { id: "doc_cuil", name: "Constancia CUIL / CUIT", default: true }
@@ -921,13 +939,14 @@
         { id: "doc_titulo", name: "Título de Propiedad Automotor", default: true },
         { id: "doc_cedula", name: "Cédulas emitidas", default: true },
         { id: "doc_f04", name: "Formulario 04 (Cambio de Radicación)", default: true },
-        { id: "doc_dni", name: "DNI Titular (con nuevo domicilio)", default: true }
+        { id: "doc_dni", name: "DNI Titular (con nuevo domicilio)", default: true },
+        { id: "doc_libre_deuda", name: "Libre Deuda de Patentes y Multas", default: true }
       ],
       duplicado_cedula: [
         { id: "doc_titulo", name: "Título de Propiedad", default: true },
         { id: "doc_f02", name: "Formulario 02", default: true },
         { id: "doc_dni", name: "DNI Titular Registral", default: true },
-        { id: "doc_denuncia", name: "Denuncia de extravío / robo (si aplica)", default: false }
+        { id: "doc_denuncia", name: "Denuncia Policial por extravío / robo (si aplica)", default: false }
       ],
       cedula_autorizado: [
         { id: "doc_dni_autorizado", name: "DNI de la persona autorizada", default: true },
@@ -938,34 +957,38 @@
         { id: "doc_titulo", name: "Título de Propiedad", default: true },
         { id: "doc_cedula", name: "Cédula de Identificación", default: true },
         { id: "doc_f02", name: "Formulario 02", default: true },
-        { id: "doc_placas", name: "Placas deterioradas (si es por deterioro)", default: false }
+        { id: "doc_placas", name: "Placas deterioradas o denuncia por robo/extravío", default: true }
       ],
       denuncia_venta: [
-        { id: "doc_boleto", name: "Boleto de Compraventa / Constancia", default: true },
+        { id: "doc_boleto", name: "Boleto de Compraventa o Constancia de Entrega", default: true },
         { id: "doc_dni_titular", name: "DNI Titular Registral", default: true },
-        { id: "doc_f11", name: "Formulario 11", default: true }
+        { id: "doc_f11", name: "Formulario 11 (Denuncia de Venta)", default: true },
+        { id: "doc_datos_comprador", name: "Nombre y DNI/CUIT del comprador (si se conoce)", default: false }
       ],
       denuncia_compra: [
-        { id: "doc_dni", name: "DNI del poseedor", default: true },
+        { id: "doc_dni", name: "DNI del poseedor / comprador", default: true },
         { id: "doc_f10", name: "Formulario 10 (Denuncia de Compra)", default: true },
         { id: "doc_f12", name: "Verificación Policial F-12", default: true },
-        { id: "doc_constancias", name: "Recibos o prueba de posesión", default: true }
+        { id: "doc_constancias", name: "Boleto, recibos o prueba de posesión", default: true }
       ],
       informe_dominio: [
+        { id: "doc_dominio_datos", name: "Dominio / Patente del automotor", default: true },
         { id: "doc_dni", name: "DNI del solicitante", default: true },
         { id: "doc_f02", name: "Formulario 02", default: true }
       ],
       inscripcion_prenda: [
         { id: "doc_contrato", name: "Contrato Prendario (3 ejemplares)", default: true },
         { id: "doc_f03", name: "Formulario 03 firmado", default: true },
-        { id: "doc_titulo", name: "Título de Propiedad", default: true }
+        { id: "doc_titulo", name: "Título de Propiedad", default: true },
+        { id: "doc_dni_acreedor", name: "DNI / CUIT Acreedor Prendario y Deudor", default: true }
       ],
       cancelacion_prenda: [
         { id: "doc_f03", name: "Formulario 03 (Cancelación)", default: true },
-        { id: "doc_contrato", name: "Contrato original sellado", default: true }
+        { id: "doc_contrato", name: "Contrato original sellado / Constancia cancelación", default: true },
+        { id: "doc_titulo", name: "Título de Propiedad", default: true }
       ],
       anotacion_embargo: [
-        { id: "doc_oficio", name: "Oficio Judicial", default: true },
+        { id: "doc_oficio", name: "Oficio Judicial firmado por juez/secretario", default: true },
         { id: "doc_f02", name: "Formulario 02", default: true }
       ],
       levantamiento_embargo: [
@@ -976,20 +999,20 @@
         { id: "doc_titulo", name: "Título de Propiedad", default: true },
         { id: "doc_cedula", name: "Cédula de Identificación", default: true },
         { id: "doc_f04", name: "Formulario 04", default: true },
-        { id: "doc_factura", name: "Factura de compra del motor (si aplica)", default: false },
+        { id: "doc_factura", name: "Factura de compra o baja del motor/chasis", default: true },
         { id: "doc_f12", name: "Verificación Policial F-12", default: true }
       ],
       asignacion_rpa: [
         { id: "doc_f12_observada", name: "Verificación Policial F-12 (Observada)", default: true },
         { id: "doc_f02", name: "Formulario 02", default: true },
-        { id: "doc_fotos", name: "Fotografías del motor/chasis", default: true }
+        { id: "doc_fotos", name: "Fotografías de la numeración/sector del motor o chasis", default: true }
       ],
       baja_unidad: [
         { id: "doc_titulo", name: "Título de Propiedad", default: true },
         { id: "doc_cedulas", name: "Todas las Cédulas emitidas", default: true },
         { id: "doc_placas", name: "Placas Metálicas (Patentes)", default: true },
         { id: "doc_f04", name: "Formulario 04", default: true },
-        { id: "doc_denuncia", name: "Denuncia de Robo (si aplica)", default: false }
+        { id: "doc_denuncia", name: "Denuncia Policial de Robo / Siniestro (si aplica)", default: false }
       ],
       _generic: [
         { id: "doc_dni_titular", name: "DNI Solicitante / Titular", default: true },
@@ -1010,7 +1033,7 @@
       return docs;
     }
 
-    // 4. Checklist Documental Operativo
+    // 5. Checklist Documental Operativo
     function initChecklist(procedureKey) {
       const container = document.getElementById('document-checklist-container');
       container.innerHTML = '';
@@ -1100,10 +1123,422 @@
     function toggleSpouseFields() {
       const marital = document.getElementById('client-marital').value;
       const sf = document.getElementById('spouse-fields');
-      if(marital === 'casado') {
+      if (marital === 'casado') {
         sf.classList.remove('hidden');
         sf.classList.add('grid');
       } else {
         sf.classList.add('hidden');
         sf.classList.remove('grid');
-        document.getElementById('client-
+        document.getElementById('client-spouse').value = '';
+        document.getElementById('client-spouse-dni').value = '';
+      }
+    }
+
+    // 6. Cálculo Automático de Alícuotas (Registro DNRPA y Rentas DGR)
+    function recalculateAutomaticRates() {
+      const vType = document.getElementById('vehicle-type').value;
+      const origin = document.getElementById('vehicle-origin').value;
+      const prov = document.getElementById('client-provincia').value;
+      const proc = document.getElementById('procedure-type').value;
+
+      let dnrpaRate = 0;
+      let dgrRate = 0;
+
+      if (TAX_RATES_CONFIG.tramitesConValuacion.includes(proc)) {
+        const catRates = TAX_RATES_CONFIG.dnrpa[vType] || TAX_RATES_CONFIG.dnrpa.auto;
+        dnrpaRate = catRates[origin] ?? catRates.nacional;
+        dgrRate = TAX_RATES_CONFIG.dgrPorProvincia[prov] ?? 1.5;
+      }
+
+      document.getElementById('tax-dnrpa-rate').value = dnrpaRate;
+      document.getElementById('tax-dgr-rate').value = dgrRate;
+      document.getElementById('display-dnrpa-rate').textContent = `${dnrpaRate}%`;
+      document.getElementById('display-dgr-rate').textContent = `${dgrRate}%`;
+
+      triggerFormUpdate();
+    }
+
+    function onProcedureChange() {
+      const procedure = document.getElementById('procedure-type').value;
+      initChecklist(procedure);
+
+      if (['informe_dominio', 'duplicado_cedula', 'cedula_autorizado', 'reposicion_placas'].includes(procedure)) {
+        document.getElementById('cost-forms-fixed').value = 20000;
+        document.getElementById('honorario-base').value = 35000;
+      } else {
+        onVehicleTypeChange(false);
+      }
+      recalculateAutomaticRates();
+    }
+
+    function onVehicleTypeChange(recalc = true) {
+      const vType = document.getElementById('vehicle-type').value;
+      if (vType === 'moto') {
+        document.getElementById('cost-forms-fixed').value = 18500;
+        document.getElementById('honorario-base').value = 45000;
+      } else if (vType === 'maquinaria') {
+        document.getElementById('cost-forms-fixed').value = 55000;
+        document.getElementById('honorario-base').value = 120000;
+      } else {
+        document.getElementById('cost-forms-fixed').value = 38500;
+        document.getElementById('honorario-base').value = 75000;
+      }
+      if (recalc) recalculateAutomaticRates();
+    }
+
+    // 7. Renderizado y Liquidación Final
+    function recalcAndRender() {
+      applyActiveMandatarioToPreview();
+
+      const prov = document.getElementById('client-provincia').value;
+      const city = document.getElementById('client-city').value || "-";
+      const seccional = document.getElementById('client-seccional').value || "-";
+      const clientDni = document.getElementById('client-dni').value.trim();
+
+      const marital = document.getElementById('client-marital').value;
+      const spouseName = document.getElementById('client-spouse').value.trim();
+      const spouseDni = document.getElementById('client-spouse-dni').value.trim();
+
+      const vDom = document.getElementById('vehicle-dominio').value || "S/D";
+      const vVal = parseFloat(document.getElementById('vehicle-valuation').value) || 0;
+
+      const dnrpaRate = parseFloat(document.getElementById('tax-dnrpa-rate').value) || 0;
+      const dgrRate = parseFloat(document.getElementById('tax-dgr-rate').value) || 0;
+      const forms = parseFloat(document.getElementById('cost-forms-fixed').value) || 0;
+      const honTotal = parseFloat(document.getElementById('honorario-base').value) || 0;
+
+      const dnrpaAmt = Math.round(vVal * (dnrpaRate / 100));
+      const dgrAmt = Math.round(vVal * (dgrRate / 100));
+
+      const subRegistral = dnrpaAmt + dgrAmt + forms;
+      const totalGeneral = subRegistral + honTotal;
+
+      // ACTUALIZACIÓN BOLETA PDF
+      document.getElementById('preview-budget-id').textContent = `#${activeBudgetId}`;
+      document.getElementById('preview-date').textContent = new Date().toLocaleDateString('es-AR');
+
+      document.getElementById('preview-client').textContent = document.getElementById('client-name').value || 'Consumidor Final';
+      document.getElementById('preview-dni').textContent = `DNI/CUIT: ${clientDni || 'A confirmar'}`;
+      document.getElementById('preview-loc').textContent = `${city}, ${prov} (${seccional})`;
+
+      const selProc = document.getElementById('procedure-type');
+      const procedureKey = selProc.value;
+      const requiresConsent = ['transferencia', 'inscripcion_prenda', 'baja_unidad'].includes(procedureKey);
+
+      const spouseSection = document.getElementById('preview-spouse-section');
+      const spouseSignature = document.getElementById('preview-spouse-signature');
+
+      if (marital === 'casado' && spouseName !== '') {
+        spouseSection.classList.remove('hidden');
+        document.getElementById('preview-spouse-name').textContent = spouseName;
+        document.getElementById('preview-spouse-dni').textContent = `DNI: ${spouseDni || '-'}`;
+        spouseSignature.style.display = requiresConsent ? 'block' : 'none';
+      } else {
+        spouseSection.classList.add('hidden');
+        spouseSignature.style.display = 'none';
+      }
+
+      document.getElementById('preview-veh').textContent = document.getElementById('vehicle-model').value || 'Vehículo a determinar';
+      document.getElementById('preview-patente').textContent = vDom.toUpperCase();
+      document.getElementById('preview-val-str').textContent = `Valuación: $${formatCurrency(vVal)}`;
+
+      document.getElementById('preview-tramite-name').textContent = selProc.options[selProc.selectedIndex].text;
+
+      document.getElementById('prev-dnrpa-rate').textContent = dnrpaRate;
+      document.getElementById('prev-dgr-rate').textContent = dgrRate;
+      document.getElementById('prev-dnrpa-amt').textContent = `$${formatCurrency(dnrpaAmt)}`;
+      document.getElementById('prev-dgr-amt').textContent = `$${formatCurrency(dgrAmt)}`;
+      document.getElementById('prev-forms-amt').textContent = `$${formatCurrency(forms)}`;
+
+      document.getElementById('prev-subtotal-registral').textContent = `$${formatCurrency(subRegistral)}`;
+      document.getElementById('prev-honorarios-amt').textContent = `$${formatCurrency(honTotal)}`;
+      document.getElementById('prev-total-general').textContent = `$${formatCurrency(totalGeneral)}`;
+
+      // Update Screen KPIs
+      document.getElementById('val-dnrpa-calculated').textContent = `$${formatCurrency(dnrpaAmt)}`;
+      document.getElementById('val-dgr-calculated').textContent = `$${formatCurrency(dgrAmt)}`;
+      document.getElementById('kpi-subtotal-registral').textContent = `$${formatCurrency(dnrpaAmt + forms)}`;
+      document.getElementById('kpi-dgr-corrientes').textContent = `$${formatCurrency(dgrAmt)}`;
+      document.getElementById('kpi-honorarios').textContent = `$${formatCurrency(honTotal)}`;
+      document.getElementById('kpi-total-general').textContent = `$${formatCurrency(totalGeneral)}`;
+
+      const aType = document.getElementById('anticipo-type').value;
+      const anticipo = aType === 'gastos'
+        ? subRegistral
+        : (aType === '50percent' ? Math.round(totalGeneral / 2) : Math.round(subRegistral + (honTotal / 2)));
+      document.getElementById('val-anticipo').textContent = `$${formatCurrency(anticipo)}`;
+      document.getElementById('prev-anticipo-label').textContent = `Anticipo sugerido para inicio: $${formatCurrency(anticipo)}`;
+
+      // Inyectar documentos activos al PDF
+      const prevDocsList = document.getElementById('prev-docs-list');
+      prevDocsList.innerHTML = '';
+      let activeDocsCount = 0;
+
+      const activeDocs = getActiveDocsForProcedure(procedureKey);
+      activeDocs.forEach(doc => {
+        const state = currentDocStatus[doc.id] || (doc.default ? 'pendiente' : 'no_aplica');
+        if (state !== 'no_aplica') {
+          activeDocsCount++;
+          const li = document.createElement('li');
+          li.className = "flex justify-between items-center py-0.5 px-1.5 rounded bg-slate-50 border border-slate-100";
+          const statusHtml = state === 'recibido'
+            ? '<span class="text-emerald-700 font-bold shrink-0 ml-1">✔ Recibido</span>'
+            : '<span class="text-amber-600 font-bold shrink-0 ml-1">⏳ Pendiente</span>';
+          li.innerHTML = `<span class="text-slate-700 truncate">${doc.name}</span> ${statusHtml}`;
+          prevDocsList.appendChild(li);
+        }
+      });
+
+      const docSection = document.getElementById('prev-docs-section');
+      if (activeDocsCount > 0) {
+        docSection.classList.remove('hidden');
+      } else {
+        docSection.classList.add('hidden');
+      }
+    }
+
+    function triggerFormUpdate() { recalcAndRender(); }
+    function formatCurrency(n) { return new Intl.NumberFormat('es-AR').format(n); }
+
+    function switchView(view) {
+      if (view === 'creator') {
+        document.getElementById('view-creator').classList.remove('hidden');
+        document.getElementById('view-history').classList.add('hidden');
+      } else {
+        document.getElementById('view-creator').classList.add('hidden');
+        document.getElementById('view-history').classList.remove('hidden');
+        renderHistoryTable();
+      }
+    }
+
+    // 8. Envío por WhatsApp
+    function sendViaWhatsApp() {
+      let tel = document.getElementById('client-phone')?.value?.replace(/\D/g, '') || '';
+      if (!tel || tel.length < 8) {
+        showToast("Por favor ingresa un número de teléfono válido.", "error");
+        return;
+      }
+      if (tel.length === 10) {
+        tel = '549' + tel;
+      }
+
+      const mandatario = getActiveMandatario();
+      const clientName = document.getElementById('client-name').value || 'Cliente';
+      const procedureSelect = document.getElementById('procedure-type');
+      const procedureText = procedureSelect.options[procedureSelect.selectedIndex].text;
+      const procedureKey = procedureSelect.value;
+      const vehicleModel = document.getElementById('vehicle-model').value || 'Vehículo';
+      const vehicleDominio = document.getElementById('vehicle-dominio').value.toUpperCase() || 'S/D';
+
+      const dnrpaAmt = document.getElementById('prev-dnrpa-amt').innerText;
+      const dgrAmt = document.getElementById('prev-dgr-amt').innerText;
+      const formsAmt = document.getElementById('prev-forms-amt').innerText;
+      const honorariosAmt = document.getElementById('prev-honorarios-amt').innerText;
+      const totalGeneral = document.getElementById('prev-total-general').innerText;
+      const anticipo = document.getElementById('val-anticipo').innerText;
+
+      const docsToCheck = getActiveDocsForProcedure(procedureKey);
+      const pendingDocs = docsToCheck
+        .filter(doc => currentDocStatus[doc.id] === 'pendiente')
+        .map(doc => doc.name);
+
+      const docsText = pendingDocs.length > 0
+        ? `*📄 DOCUMENTACIÓN PENDIENTE A TRAER:*\n` + pendingDocs.map(d => `▪️ ${d}`).join('\n')
+        : `*✅ DOCUMENTACIÓN:* Toda la documentación requerida para iniciar ya se encuentra entregada.`;
+
+      const texto = `*PRESUPUESTO GESTORÍA AUTOMOTOR* 🚗\n` +
+      `Hola *${clientName}*, te comparto el detalle estimado de tu trámite:\n\n` +
+      `*Trámite:* ${procedureText}\n` +
+      `*Vehículo:* ${vehicleModel} - Patente: *${vehicleDominio}*\n\n` +
+      `*💰 DESGLOSE DE COSTOS:*\n` +
+      `▪️ Arancel Registro (DNRPA): ${dnrpaAmt}\n` +
+      `▪️ Impuesto Sellos (Rentas): ${dgrAmt}\n` +
+      `▪️ Formularios Oficiales: ${formsAmt}\n` +
+      `------------------------\n` +
+      `▪️ *Honorarios Profesionales:* ${honorariosAmt}\n` +
+      `------------------------\n` +
+      `*TOTAL GENERAL ESTIMADO:* ${totalGeneral}\n` +
+      `*Anticipo Sugerido:* ${anticipo}\n\n` +
+      docsText + `\n\n` +
+      `Elaborado por: *${mandatario.name}* (${mandatario.matricula})\n` +
+      `_Válido por 10 días. Sujeto a actualización de tabla DNRPA._`;
+
+      window.open(`https://wa.me/${tel}?text=${encodeURIComponent(texto)}`, '_blank');
+      showToast('Abriendo WhatsApp con presupuesto detallado...', 'success');
+    }
+
+    // 9. Base de Datos (LocalStorage)
+    function manualSaveCurrentBudget() {
+      const id = activeBudgetId;
+      const date = new Date().toLocaleDateString('es-AR', { hour: '2-digit', minute: '2-digit' });
+      const tramiteTexto = document.getElementById('procedure-type').options[document.getElementById('procedure-type').selectedIndex].text;
+      const total = document.getElementById('prev-total-general').innerText;
+
+      const budgetData = {
+        id: id,
+        date: date,
+        mandatarioId: activeMandatarioId,
+        clientName: document.getElementById('client-name').value,
+        clientDni: document.getElementById('client-dni').value,
+        clientPhone: document.getElementById('client-phone').value,
+        marital: document.getElementById('client-marital').value,
+        spouseName: document.getElementById('client-spouse').value,
+        spouseDni: document.getElementById('client-spouse-dni').value,
+        provincia: document.getElementById('client-provincia').value,
+        city: document.getElementById('client-city').value,
+        seccional: document.getElementById('client-seccional').value,
+        vType: document.getElementById('vehicle-type').value,
+        procType: document.getElementById('procedure-type').value,
+        dominio: document.getElementById('vehicle-dominio').value,
+        model: document.getElementById('vehicle-model').value,
+        origin: document.getElementById('vehicle-origin').value,
+        valuation: document.getElementById('vehicle-valuation').value,
+        docStatus: { ...currentDocStatus },
+        taxDnrpa: document.getElementById('tax-dnrpa-rate').value,
+        taxDgr: document.getElementById('tax-dgr-rate').value,
+        forms: document.getElementById('cost-forms-fixed').value,
+        honBase: document.getElementById('honorario-base').value,
+        anticipoType: document.getElementById('anticipo-type').value,
+        summaryTramite: tramiteTexto,
+        summaryTotal: total
+      };
+
+      const existingIndex = budgetHistory.findIndex(b => b.id === id);
+      if (existingIndex > -1) {
+        budgetHistory[existingIndex] = budgetData;
+      } else {
+        budgetHistory.unshift(budgetData);
+      }
+
+      localStorage.setItem('gestorAutoBudgets', JSON.stringify(budgetHistory));
+      showToast('Presupuesto guardado correctamente', 'success');
+    }
+
+    function createNewBudget() {
+      activeBudgetId = "PRE-" + Math.floor(Math.random() * 89999 + 10000);
+      currentDocStatus = {};
+      document.querySelectorAll('input[type="text"], input[type="tel"]').forEach(input => {
+        if (input.id !== 'client-city' && !input.id.startsWith('mandatario-')) input.value = '';
+      });
+      document.getElementById('client-marital').value = 'soltero';
+      toggleSpouseFields();
+      document.getElementById('vehicle-valuation').value = '0';
+
+      onProcedureChange();
+      switchView('creator');
+      showToast('Nuevo presupuesto en blanco', 'info');
+    }
+
+    function renderHistoryTable() {
+      const container = document.getElementById('history-table-container');
+      if (!container) return;
+
+      if (budgetHistory.length === 0) {
+        container.innerHTML = `<div class="py-12 text-center text-slate-500 dark:text-slate-400">
+          <i class="fa-solid fa-folder-open text-5xl mb-4 opacity-50"></i>
+          <p class="text-sm font-medium">No hay presupuestos guardados en el historial.</p>
+        </div>`;
+        return;
+      }
+
+      let html = `<div class="overflow-x-auto rounded-lg border border-slate-200 dark:border-slate-700">
+        <table class="w-full text-left border-collapse whitespace-nowrap">
+        <thead>
+          <tr class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-[11px] uppercase tracking-wider">
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">ID / Fecha</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Cliente</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Vehículo</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Trámite</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600">Total Estimado</th>
+            <th class="p-3 font-bold border-b border-slate-200 dark:border-slate-600 text-center">Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-xs text-slate-800 dark:text-slate-200">`;
+
+      budgetHistory.forEach(b => {
+        html += `
+          <tr class="hover:bg-slate-50 dark:hover:bg-slate-600/30 transition-colors">
+            <td class="p-3">
+              <strong class="block text-brand-600 dark:text-brand-400 font-mono">${b.id}</strong>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400">${b.date}</span>
+            </td>
+            <td class="p-3 font-medium">${b.clientName || 'Consumidor Final'}</td>
+            <td class="p-3">
+              <span class="bg-slate-200 dark:bg-slate-600 px-1.5 py-0.5 rounded text-[10px] font-mono font-bold mr-1 border border-slate-300 dark:border-slate-500">${(b.dominio || 'S/D').toUpperCase()}</span>
+              ${b.model || 'Sin Especificar'}
+            </td>
+            <td class="p-3 text-[11px] truncate max-w-[150px]" title="${b.summaryTramite}">${b.summaryTramite}</td>
+            <td class="p-3 font-bold text-emerald-600 dark:text-emerald-400">${b.summaryTotal}</td>
+            <td class="p-3 text-center space-x-2">
+              <button onclick="loadBudget('${b.id}')" class="p-2 bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-800 transition cursor-pointer" title="Cargar y Editar">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+              <button onclick="deleteBudget('${b.id}')" class="p-2 bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300 rounded-lg hover:bg-rose-200 dark:hover:bg-rose-800 transition cursor-pointer" title="Eliminar Presupuesto">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table></div>`;
+      container.innerHTML = html;
+    }
+
+    function loadBudget(id) {
+      const b = budgetHistory.find(x => x.id === id);
+      if (!b) return;
+
+      activeBudgetId = b.id;
+
+      if (b.mandatarioId && mandatariosList.some(m => m.id === b.mandatarioId)) {
+        activeMandatarioId = b.mandatarioId;
+        localStorage.setItem('gestorAutoActiveMandatarioId', activeMandatarioId);
+        initMandatarios();
+      }
+
+      document.getElementById('client-name').value = b.clientName || '';
+      document.getElementById('client-dni').value = b.clientDni || '';
+      document.getElementById('client-phone').value = b.clientPhone || '';
+      document.getElementById('client-marital').value = b.marital || 'soltero';
+      document.getElementById('client-spouse').value = b.spouseName || '';
+      document.getElementById('client-spouse-dni').value = b.spouseDni || '';
+      document.getElementById('client-provincia').value = b.provincia || 'Corrientes';
+      document.getElementById('client-city').value = b.city || 'Corrientes Capital';
+      document.getElementById('client-seccional').value = b.seccional || 'Corrientes Nº 1';
+
+      document.getElementById('vehicle-type').value = b.vType || 'auto';
+      document.getElementById('procedure-type').value = b.procType || 'transferencia';
+      document.getElementById('vehicle-dominio').value = b.dominio || '';
+      document.getElementById('vehicle-model').value = b.model || '';
+      document.getElementById('vehicle-origin').value = b.origin || 'nacional';
+      document.getElementById('vehicle-valuation').value = b.valuation || '0';
+
+      document.getElementById('cost-forms-fixed').value = b.forms || '0';
+      document.getElementById('honorario-base').value = b.honBase || '0';
+      document.getElementById('anticipo-type').value = b.anticipoType || 'gastos_plus_half_fee';
+
+      toggleSpouseFields();
+      currentDocStatus = b.docStatus ? { ...b.docStatus } : {};
+      initChecklist(b.procType);
+      recalculateAutomaticRates();
+      switchView('creator');
+      showToast('Presupuesto cargado exitosamente', 'info');
+    }
+
+    function deleteBudget(id) {
+      if (confirm('¿Estás seguro de eliminar este presupuesto del historial de forma permanente?')) {
+        budgetHistory = budgetHistory.filter(b => b.id !== id);
+        localStorage.setItem('gestorAutoBudgets', JSON.stringify(budgetHistory));
+        renderHistoryTable();
+        showToast('Presupuesto eliminado', 'error');
+      }
+    }
+
+    // Inicializar todo al cargar
+    initMandatarios();
+    initChecklist(document.getElementById('procedure-type').value);
+    recalculateAutomaticRates();
+  </script>
+</body>
+</html>
